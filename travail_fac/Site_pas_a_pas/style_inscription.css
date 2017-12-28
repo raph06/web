@@ -1,0 +1,152 @@
+﻿
+
+header 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+#titre_principal
+{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+#logo
+{
+    display:flex;
+    flex-direction:row;
+    align-items: flex-start;
+}
+
+#logo img
+{
+    margin-left: 6%;
+    width: 300px;
+    height: 100px;
+    max-width: 100%;
+    height: auto !important;
+}
+
+#Menu_Principal
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: center; /* centre le menu contextuel du haut */
+}
+
+header h1
+{
+    font-family: 'poppinsregular' ,'Trebuchet M5',serif, sans-serif;
+    font-size: 3.5em;
+    font-weight: normal;
+    margin: 0 0 10px 10px;
+}
+
+header h2
+{
+    font-family: 'poppinsregular' ,'Trebuchet M5',serif, sans-serif;
+    font-size: 1.5em;
+    margin-top: 15px;
+    font-weight: normal;
+}
+
+section
+{
+	display: flex;
+    flex-direction: column;
+    align-items: center; /* aligne les encadré des titres des paragraphes */
+}
+
+article
+{
+    width:90%;
+    max-width: 1890px;
+    min-width:250px;
+    margin-left:5%;
+    margin-right:5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* aligne les encadré des titres des paragraphes */
+    flex-wrap: wrap;
+    position: relative;
+    background: skyblue;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding: 2px;
+    color: black;
+    margin-bottom: 15px;
+
+}
+
+
+/* ************************************************************************* */
+/*     CSS DU BOUTON DE CHOIX FAMILLE|ETUDIANT SUR LA PAGE INSCRIPTION       */
+/* ************************************************************************* */
+
+#menu a
+{
+    text-decoration: none;
+    display: inline-block;
+    line-height:50px
+    color:#666;
+    padding:14px;
+    background-color:#F8F8F8;
+
+}
+
+#menu a:hover
+{
+    color:purple;
+    background-color: #0066ff;
+}
+
+
+article #menu a
+{
+    border-radius: 3px 3px 3px 3px;
+    margin-right:5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .3)
+}
+
+/* ************************************************************************* */
+/*     FIN CSS DU BOUTON DE CHOIX FAMILLE|ETUDIANT SUR LA PAGE INSCRIPTION   */
+/* ************************************************************************* */
+
+article h1
+{
+    position: relative;
+    background-color: #706b64;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding: 8px;
+    color: white;
+    font-size: 1.6em;
+    text-align:center;
+}
+
+article h2
+{
+    font-family: arial, 'Trebuchet MS', serif, sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 0.8em; 
+}
+
+article #formDiv
+{
+    text-align:center;
+    max-width:1890px;
+    min-width:250px;
+    width: 50%;
+}
+
+article #formDiv textarea
+{
+    max-width:1890px;
+    min-width:250px;
+    width: 100%;
+}

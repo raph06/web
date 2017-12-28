@@ -1,0 +1,153 @@
+﻿header 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+#titre_principal
+{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+#logo
+{
+    display:flex;
+    flex-direction:row;
+    align-items: flex-start;
+}
+
+#logo img
+{
+    margin-left: 6%;
+    width: 300px;
+    height: 100px;
+    max-width: 100%;
+    height: auto !important;
+}
+
+#Menu_Principal
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: center; /* centre le menu contextuel du haut */
+}
+
+header h1
+{
+    font-family: 'poppinsregular' ,'Trebuchet M5',serif, sans-serif;
+    font-size: 3.5em;
+    font-weight: normal;
+    margin: 0 0 10px 10px;
+}
+
+header h2
+{
+    font-family: 'poppinsregular' ,'Trebuchet M5',serif, sans-serif;
+    font-size: 1.5em;
+    margin-top: 15px;
+    font-weight: normal;
+}
+
+section
+{
+	display: flex;
+    flex-direction: column;
+    align-items: center; /* aligne les encadré des titres des paragraphes */
+    width:100%;
+}
+
+article
+{
+    max-width: 1890px;
+    margin-left:5%;
+    margin-right:5%;
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* aligne les encadré des titres des paragraphes */
+    flex-wrap: wrap;
+    position: relative;
+    background: skyblue;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding: 2px;
+    color: black;
+    margin-bottom: 15px;
+
+}
+
+article h1
+{
+    height: auto;
+    position: relative;
+    background-color: #706b64;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding: 8px;
+    color: white;
+    font-size: 1.6em;
+    text-align:center;
+}
+
+article h2
+{
+    font-family: arial, 'Trebuchet MS', serif, sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 0.8em; 
+}
+
+article p /* gère le texte contenu dans l'article : centrer justifié etc. */
+{
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: justify;
+    text-justify: inter-word; /* On justifie le contenu du paragraphe pour la lisibilité */
+}
+
+ #formDiv
+{
+    display:flex;
+    flex-direction:row;
+    margin:auto;
+    align-items:center;
+    width:35%;
+    max-width: 300px;
+	min-width:300px;
+}
+
+#ins
+{
+    margin: auto;
+}
+
+.insc
+{
+    display: flex;
+    flex-direction: row;
+    background: linear-gradient(to left top,#0000A5,#0000FF);
+    padding: 50px;
+    color:white;
+    border-radius: 8px 8px 8px 8px;
+    font-weight: bold;
+}
+
+
+.insc:hover
+{
+    background:linear-gradient(to left top,#0000FF,#0000A5);
+    position: relative;
+    bottom: 0;
+}
+
+#choix
+{
+    display:flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: space-between;
+}
+

@@ -1,0 +1,34 @@
+\select@language {french}
+\contentsline {section}{\numberline {1}Introduction}{3}
+\contentsline {subsection}{\numberline {1.1}Th\'ematique et probl\'ematique}{3}
+\contentsline {subsection}{\numberline {1.2}Organisation du projet et du rapport}{3}
+\contentsline {section}{\numberline {2}Sp\'ecifications}{4}
+\contentsline {subsection}{\numberline {2.1}\textbf {Inscription}}{4}
+\contentsline {subsection}{\numberline {2.2}\textbf {Authentification}}{6}
+\contentsline {subsection}{\numberline {2.3}\textbf {Edition de profil}}{7}
+\contentsline {subsection}{\numberline {2.4}\textbf {Gestion de l'emploi du temps}}{9}
+\contentsline {subsection}{\numberline {2.5}\textbf {Visite du site}}{12}
+\contentsline {subsection}{\numberline {2.6}\textbf {Consultation du profil personnel}}{13}
+\contentsline {subsection}{\numberline {2.7}\textbf {Demande de prestataire}}{14}
+\contentsline {subsection}{\numberline {2.8}\textbf {Acceptation du contrat }}{15}
+\contentsline {subsection}{\numberline {2.9}\textbf {Paiement du prestataire}}{17}
+\contentsline {subsection}{\numberline {2.10}\textbf {Annulation} }{19}
+\contentsline {subsection}{\numberline {2.11}\textbf {\'Evaluation prestataire/famille}}{21}
+\contentsline {subsection}{\numberline {2.12}\textbf {Signalement d'un commentaire inappropri\'e}}{23}
+\contentsline {subsection}{\numberline {2.13}\textbf {Modification d'un commentaire inappropri\'e}}{24}
+\contentsline {subsection}{\numberline {2.14}\textbf {Validation d'un profil}}{25}
+\contentsline {subsection}{\numberline {2.15}\textbf {Gestion des divers taux par les Admins}}{26}
+\contentsline {subsection}{\numberline {2.16}\textbf {Cr\'eation d'un compte Admin}}{27}
+\contentsline {section}{\numberline {3}Analyse}{29}
+\contentsline {subsection}{\numberline {3.1}Diagrammes de plus haut niveau}{29}
+\contentsline {subsection}{\numberline {3.2}Diagrammes de classes m\'etier}{29}
+\contentsline {subsection}{\numberline {3.3}Mod\`ele logique de la base de donn\'ees}{29}
+\contentsline {section}{\numberline {4}Conception}{31}
+\contentsline {subsection}{\numberline {4.1}Diagramme de s\'equence: mod\'eration d'un commentaire}{31}
+\contentsline {section}{\numberline {5}R\'ealisation}{32}
+\contentsline {subsection}{\numberline {5.1}Diagramme d'activit\'e pour les quatre types d'utilisateurs}{32}
+\contentsline {subsection}{\numberline {5.2}Tests fonctionnels}{36}
+\contentsline {section}{\numberline {6}Retrospective}{36}
+\contentsline {subsection}{\numberline {6.1}Captures Esitting}{37}
+\contentsline {section}{\numberline {A}Gantt chart}{45}
+\contentsline {section}{\numberline {B}Annexe Code php: \'Edition du profil}{46}

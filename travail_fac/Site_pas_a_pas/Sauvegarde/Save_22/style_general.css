@@ -1,0 +1,28 @@
+/* Mise en place des polices spéciales */
+@font-face {
+    font-family: 'poppinsregular';
+    src: url('Polices/poppins-regular-webfont.woff2') format('woff2'),
+         url('Polices/poppins-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#bloc_page
+{
+    margin: auto;
+}
+
+section h1, footer h1, nav a, aside ul
+{
+    font-family: 'poppinsregular', arial, 'Trebuchet MS', serif, sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 1.4em;
+}
+
+section p, footer p
+{
+    font-family: 'Tahoma' ,'Trebuchet M5',serif, sans-serif;
+    font-weight: normal;
+    font-size: 1.2em;
+}

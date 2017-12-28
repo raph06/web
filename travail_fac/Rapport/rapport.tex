@@ -1,0 +1,1473 @@
+\documentclass[11pt]{article}
+\usepackage{geometry} 
+\usepackage[french]{babel}  
+\usepackage[latin1]{inputenc}
+          % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{subfig}
+
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\geometry{hmargin=1.5cm,vmargin=1.5cm} %marges
+
+\title{\includegraphics[scale=0.5]{figures/logo_site}\\\vspace{2cm}
+\Huge{Création d'un site internet proposant des prestataires pour de la garde d'enfants}}
+
+\author{\hspace{-1.5cm} R. BONNET - K. GIULIETTI - H. GRUNIG - V. GUERLAIS - T. L'YVONNET - N.SADOUNI \vspace{1cm}}
+\date{\Large{\today}}                                           % Activate to display a given date or no date
+
+\usepackage{minitoc}
+\setcounter{secttocdepth}{5}
+
+\begin{document}
+ %page suivante
+
+\vspace{-10cm}
+\maketitle
+\newpage
+\tableofcontents %table des matiÃ¨res
+\mtcsettitle{secttoc}{Cas d'utilisations}
+
+\dosecttoc
+\faketableofcontents
+\small
+\newpage
+\section{Introduction}
+\subsection{Thématique et problématique}
+Les nombreux parents qui n'ont pas la possibilité d'être à temps complet en charge de leurs enfants, à cause d'impératifs professionnels ou personnels, sont à la recherche de personnes motivées mais aussi flexibles pour garder leurs enfants. D'autre part une grande partie des étudiants sont à la recherche d'emplois à temps partiel leurs permettant de poursuivre leurs études, d'obtenir une rémunération leur permettant de vivre leurs vies étudiantes dans les meilleurs conditions ou même de préparer leurs entrées dans la vie active. Il y a aussi un besoin perceptible pour les deux partis d'être connecté au bon correspondant afin de répondre aux attentes de chacun.\\
+
+L'offre et la demande existent en matière de babysitting, nous avons d'une part
+des étudiants désirant travailler en dehors de leurs heures d'études et d'autre part
+des familles soucieuses de trouver des personnes dynamiques et impliquées dans le travail
+qu'on leur propose.
+Le but de ce projet est donc la création d'une plateforme 
+permettant de regrouper les deux partis et faciliter l'échange de services.
+Cette plateforme permettra
+d'une part aux parents de chercher dans une zone géographique donnée les annonces
+qui leurs conviennent le mieux, et d'autre part aux étudiants de pouvoir
+déposer des candidatures qui seront analysées par les familles.
+La recherche des profils pourra donc se faire selon divers critères notamment
+la zone géographique mais également selon une grille tarifaire, les notes attribuées aux 
+babysitter par les précédents clients ainsi que les remarques qu'ils ont obtenus suites
+à leurs diverses missions. \\
+
+Outre la lecture simple et rapide des profils et disponibilités des prestataires (étudiants), le site internet doit aussi permettre aux prestataires une lecture complète des profils des familles (adresse, nombre d'enfants, avis concernant la famille, etc.) et de fixer leur propre tarif horaire. Le site gère ensuite plusieurs cas en appliquant pour chaque cas un taux spécifique. Ces cas sont : le nombre d'enfants, les gardiennages de nuit, les week-ends, et les jours féries. Ainsi, pour ces différentes situations, le système modifiera le taux horaire renseigné par l'étudiant.\\
+
+Enfin le site internet doit se placer comme intermédiaire entre les deux partis et ce, aux différents stades de la mise en contact pour rendre celui-ci le plus simple possible. Le site doit assurer le traitement administratif des profils des familles et des étudiants ainsi que le traitement financier (virement bancaire et annulations) des gardes effectuées. Les administrateurs du site doivent pouvoir superviser les différentes étapes de la mise en contact qui sont les plus importantes (vérification des profils, des paiements, confidentialité des données récoltées, etc...). \\
+
+La visibilité des informations sur le site web peut dépendre de plusieurs facteurs comme par exemple: le statut de l'utilisateur (famille ou étudiant, connecté au site ou non connecté).
+Le site web pourra mettre en contact des utilisateurs de France exclusivement.\\
+ \subsection{Organisation du projet et du rapport}
+ \begin{itemize}
+ 
+ \item Nous commencerons l'analyse du projet par les différents cas d'utilisation. Pour chacun d'entre eux nous présenterons les spécification détaillées associées à ces cas d'utilisation. Grâce à cette 
+ première partie nous espérons mettre à jour toutes les fonctionnalités du site; des plus simples aux plus complexes.\\
+ 
+ \item Nous présenterons par la suite notre projet dans son ensemble avec une approche analytique en utilisant notamment des diagrammes UML qui décriront le système et ses acteurs mais aussi certains aspects plus conceptuels comme par exemple la structure des tables de notre base de données. Des captures d'écran présenteront l'aspect final de notre site.\\
+
+ \item Ensuite nous nous attacherons à présenter les différents problèmes et solutions que nous avons pu rencontré et comment nous les avons résolus.
+ Nous présenterons les forces et les faiblesses de l'interface que nous avons construite par le biais d'un tableau représentant les différents cas fonctionnels rencontrés par les différents utilisateurs. \\
+
+\item Enfin, nous tâcherons de porter un regard critique sur notre travail et sur le projet en général.\\
+
+\item Un exemple de code (php/html) sera également présentés en annexe.
+ 
+ 
+ \end{itemize}
+ 
+
+ 
+\newpage
+
+\section{Spécifications}
+Cas d'utilisation sous la forme de scénarios de Cockburn \& détaillée \\
+
+\secttoc
+
+
+\begin{itemize}
+
+\item \subsection{\textbf{Inscription}}\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+Acteurs: Tous utilisateurs non-inscrit. (pas de session active)\\
+Pré-condition: L'utilisateur non-inscrit se situe sur la page d'accueil. \\
+
+Scénario nominal:\\
+\begin{enumerate}
+\item L'utilisateur sélectionne "Inscription".
+\item Le Système propose un choix entre une Inscription "Etudiante" ou "Famille".
+	\begin{enumerate}
+	\item L'utilisateur choisit une inscription "Etudiante"
+		\begin{enumerate}
+		\item Le système affiche un formulaire specifique aux étudiants
+		\item Ce formulaire possède des champs dont certains annotés d'une étoile (obligatoires) :  "E-mail*, Mot de passe*, Nom*, Prénom*, Age*,  Adresse* (complète), N°tel*, photocopie CNI*, véhiculé ou non, niveau d'étude, description personnelle ( passions, personnalités,etc.)
+		\item L'étudiant renseigne une option pour accepter automatiquement les missions ou renseigner un délai de réponse ( 3h, 6h, 24h par exemple )
+		\end{enumerate}
+	\item L'utilisateur choisit une inscription "Famille"
+		\begin{enumerate}
+		\item Le système affiche un formulaire specifique aux familles
+		\item Ce formulaire possède des champs dont certains annotés d'une étoile (obligatoires) : "E-mail*,Mot de passe*, Nom*, Prénom*, Adresse* (complète), N°tel*, Nombre d'enfants, Age des enfants, Photos, description personnelle (à propos des enfants, caractères, préférences...)
+		\end{enumerate}
+	\end{enumerate}
+\item L'utilisateur remplit le formulaire
+\begin{enumerate}
+\item Le système vérifie l'exactitude des informations
+	\begin{enumerate}
+	\item Adresse e-mail existante dans la base de données $\rightarrow$ go to 3 avec message d'erreur
+	\item L'adresse e-mail entrée correspond à une adresse mail $\rightarrow$ go to 3 avec message d'erreur
+	\item Mot de passe retapé diffèrent du mot de passe initial $\rightarrow$ go to 3 avec message d'erreur
+	\end{enumerate}
+\item Le système enregistre l'utilisateur $\rightarrow$ go to P1
+\item L'utilisateur est redirigé sur la page d'accueil
+\end{enumerate}
+\item L'utilisateur annule l'inscription $\rightarrow$ go to P2\\
+
+\end{enumerate}
+
+Post condition: 	
+\begin{itemize}
+\item P1: L'utilisateur est inscrit, un mail de confirmation est envoyé à l'acteur
+\item P2: L'utilisateur est renvoyé en page d'accueil\\
+\end{itemize}
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: Utilisateur visiteur.
+\item Sortie: Utilisateur visiteur ou utilisateur inscrit.
+\end{itemize}
+\newpage
+\subsubsection*{Spécification Détaillée}
+\begin{itemize}
+\item{\textbf{Scripts}}
+\begin{itemize}
+\item {\textbf{Inscription.html :}} 
+Page qui permet de rediriger soit vers InscriptionEtudiant.html soit vers InscriptionFamille.html
+\item{\textbf{InscriptionEtudiant.html :}}
+Contient un formulaire à remplir par l'utilisateur qui renvoie sur InscriptionEtudiant.php. Si il y a eu une erreur dans le choix de profil à remplir, on peut se rendre tout de même sur famille "InscriptionFamille.html".
+\item{\textbf{InscriptionEtudiant.php :}} 
+On récupère les \$\_POST de la page précédente, on vérifie si les \$\_POST des champs obligatoires (*) ne sont pas vides, on vérifie le format de certains champs (email), on chiffre le mot de passe via "password hash", on reformate la date pour la stocker. On a attribué un nom aléatoire temporaire à l'image chargé par l'utilisateur afin d'éviter de se retrouver avec des images possédant le même nom. Les informations saisies sont envoyées vers la base de donnée "projetsi". L'image est chargée dans un dossier "Image" via "move uploaded file". L'utilisateur est ensuite renvoyé vers la page d'accueil des utilisateurs connectés avec une confirmation.
+\item{\textbf{InscriptionFamille.html :}} Contient un formulaire qui envoie sur InscriptionFamille.php.
+\item{\textbf{InscriptionFamille.php :}}  Fonctionne de manière identique à InscriptionEtudiant.php. Il s'agit de 2 types d'utilisateurs différents donc les champs à remplir ne sont pas strictement identiques.
+\end{itemize}
+
+\item{\textbf{Fonctions}}
+
+\begin{itemize}
+\item {\textbf{filter\_var(\$\_email,FILTER\_VALIDATE\_EMAIL) :}}
+Vérifie qu'il y a du texte type ***@***.***
+
+
+\end{itemize}
+\end{itemize}
+\newpage
+
+
+
+\item \subsection{\textbf{Authentification}}\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+
+Acteurs: Tous utilisateurs.\\
+Pré-condition: L'utilisateur est sur la page d'accueil du site et possède un compte sur le site. \\
+
+Scénario nominal:\\
+\begin{enumerate}
+\item L'utilisateur sélectionne "Se connecter"
+\item Le système propose un formulaire
+\item L'utilisateur entre ses informations (E-mail et mot de passe)
+\item Le système vérifie l'exactitude des informations 
+\begin{enumerate}
+	\item La vérification aboutit
+	\item La vérification n'aboutit pas
+		\begin{enumerate}
+		\item l'utilisateur se trompe dans son mot de passe
+		\item au troisième essai le système propose à l'utilisateur "Avez-vous oublié votre mot de passe ?"
+			\begin{enumerate}
+			\item l'utilisateur sélectionne "je n'ai pas oublié mon mot de passe"
+			\item le système affiche à nouveau les champs pour se connecter à son compte
+			\item l'utilisateur sélectionne mot de passe oublié $\rightarrow$ go to P2
+			\end{enumerate}
+		\item l'utilisateur a oublié son mot de passe
+		\item il sélectionne un champ "mot de passe oublié" $\rightarrow$ go to P2
+		\end{enumerate}
+		\
+\end{enumerate}
+\item Le système charge les informations de l'utilisateur $\rightarrow$ go to P1
+\item L'utilisateur est redirigé sur la page de garde du site\\
+\end{enumerate}
+
+Post condition: 	
+\begin{itemize}
+\item P1: L'utilisateur est authentifié 
+\item P2 : Le système envoie un mail pour mot de passe oublié\\
+\end{itemize}
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: Utilisateur inscrit non authentifié.
+\item Sortie: Utilisateur inscrit non authentifié ou utilisateur inscrit connecté (UIC).
+\end{itemize}
+\subsubsection*{Spécification Détaillée}
+
+\textbf{Scripts}
+\begin{itemize}
+\item \textbf{Connexion.html}: \\Ce script contient les formulaires nécessaires à la connexion; il envoie les données via \$\_POST à \textbf{login.php}.
+\item \textbf{login.php:} \\Ce script reçoit des données \$\_POST de la page de connexion et prend en entrée un login (email) et un mot de passe. Le script interroge la base de données afin de savoir si le visiteur qui se connecte est bien membre du site.  \$\_SESSION['type']  est définit en fonction du type d'utilisateur, la fonction \textbf{get\_infos()} est appelée et le script redirige l'utilisateur connecté en page d'accueil. 
+\end{itemize}
+
+\textbf{Fonctions}
+\begin{itemize}
+\item \textbf{get\_infos(\$bdd,\$login):}\\ Cette fonction prend en entrée les informations sur la base de données et le login (email de l'utilisateur) afin de completer l'array \$\_SESSION en fonction des informations renseignées par l'utilisateur. Cette fonction interroge la base de données pour obtenir ces informations (email, nom, prénom, ID).
+
+\end{itemize}
+
+\newpage
+			
+			
+			
+\item \subsection{\textbf{Edition de profil}}\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+Acteurs: Tous utilisateurs inscrits.\\
+Pré-condition: L'utilisateur possède un compte sur le site. \\
+
+Scénario nominal:\\
+\begin{enumerate}
+\item L'utilisateur s'authentifie 
+\item L'utilisateur sélectionne "Mon compte"
+\item Le système charge une page où différentes sections sont présentes
+\item L'utilisateur peut modifier sa photo de profil, ses coordonnées, sa description personnelle, ses identifiants et son adresse email
+	\begin{enumerate}
+	\item L'utilisateur est un étudiant, il peut modifier son emploi du temps
+	\item l'étudiant peut renseigner son tarif horaire
+	\item le système prend en compte le tarif horaire de l'étudiant
+	\item le système calcul les cas spéciaux en fonction du tarif horaire de l'étudiant, les cas spéciaux sont :
+	\begin{enumerate}
+	\item jours féries en France, le système applique une majoration de 25\%
+	\item les week-ends, le système applique une majoration de 25\%
+	\item la nuit ( à partir de 22h jusqu'à 08h) le système applique une majoration de 50\%
+	\item pour chaque enfants supplémentaire le système applique une majoration de 50\%
+	\end{enumerate}
+	\item l'étudiant peut modifier la grille tarifaire
+	\item l'étudiant peut modifier son mode d'acceptation des missions (automatique ou manuel) et doit préciser le cas échéant sont temps de réponse moyen.
+	\end{enumerate}
+\item Le système propose une validation ou annulation des modifications effectuées
+\begin{enumerate}
+	\item L'utilisateur valide les modifications en sélectionnant sur "Valider"$\rightarrow$  go to P1
+	\item L'utilisateur annule les modifications en sélectionnant sur "Annuler" $\rightarrow$  go to P2\\
+\end{enumerate}\end{enumerate}
+
+Post condition: 	
+\begin{itemize}
+\item P1: Le profil de l'utilisateur est modifié, une notification est envoyée aux admins pour qu'ils valident la modification
+\item P2 : Le profil de l'utilisateur n'est pas modifié\\
+\end{itemize}
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: Utilisateur inscrit connecté (UIC) dont le profil n'est pas à jour.
+\item Sortie: UIC dont le profil n'est pas à jour ou UIC dont le profil n'est pas à jour.
+\end{itemize}
+
+\newpage
+\subsubsection*{Spécification Détaillée}
+\begin{itemize}
+
+\item{Scripts}
+
+\begin{itemize}
+
+\item{ \textbf{BDprofilUtilisateur.php}}
+Récupère les informations d'un utilisateur  dans la base de données ( Famille / Etudiant / Admin ) si certains champs sont vide, la valeur NULL est récupérée.
+\item { \textbf{ModificationProfilUtilisateur.php}}\\
+Cette page permet de modifier les informations de l'utilisateurs grâce à des champs prérempli des informations déjà existante sur le profil grâce à la fonction BDProfilUtilisateur.php. Sur cette page se trouve aussi un accès à l'emploi du temps pour les étudiants.
+Vérifie si l'utilisateur est un super admin / admin ou une famille / étudiant. En fonction du type d'utilisateur renverra vers "dash\_admin.php" si l'utilisateur est un admin, "ModificationBDDProfilEtudiant.php" si l'utilisateur est un étudiant, "ModificationBDDProfilFamille.php" s'il s'agit d'une famille.\label{titi}
+L'utilisateur pourra modifier ses informations. S'il ne modifie pas un champ, récupère l'ancienne information.
+\item{ \textbf{ModificationBDDProfilEtudiant.php}}
+Enregistre les modifications que l'étudiant saisit dans la base de données. Le mot de passe est crypté, ainsi il devra forcement entrer un mot de passe (identique, ou nouveau et le confirmer).
+\item{ \textbf{ModificationBDDProfilFamille.php}}
+Enregistre les modifications que la famille saisit. Le mot de passe est ici aussi crypté.
+\end{itemize}
+
+
+\end{itemize}
+
+\newpage
+
+\item \subsection{\textbf{Gestion de l'emploi du temps}}\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+
+Acteurs: Étudiants inscrits.\\
+Pré-condition: L'utilisateur est un étudiant et possède un compte sur le site. \\
+
+Scénario nominal:\\
+\begin{enumerate}
+\item L'utilisateur s'authentifie 
+\item L'utilisateur sélectionne "Éditer mon profil"
+\item L'étudiant sélectionne "Mon emploi du temps"
+
+\item Le système affiche un emploi du temps
+\begin{enumerate}
+	\item Il s'agit de la première connexion de l'étudiant
+\begin{enumerate}
+\item Le système lui affiche un calendrier du mois actuel et du mois prochain
+\item  L'étudiant sélectionne le/les jour(s) où il est disponible
+\item  Le système lui affiche des plages horaires à sélectionner
+\item  L'étudiant sélectionne les tranches horaires pour lesquelles il est disponible
+\item  Le système demande à l'étudiant de valider son emploi du temps
+\item  L'étudiant valide son emploi du temps en sélectionnant sur "Valider"  $\rightarrow$ go to P1
+\item  L'étudiant ne valide pas son emploi du temps  $\rightarrow$ go to P2
+\end{enumerate}
+	\item Il ne s'agit pas de sa premiere connexion, il souhaite modifier son EdT
+\begin{enumerate}
+
+\item Le système lui affiche son emploi du temps
+\item L'étudiant sélectionné le(s) jour(s) qu'il souhaite modifier
+\item Le système lui détaille les jours sélectionnés 
+\item L'étudiant désélectionne les plages horaires sélectionnées et l'étudiant a la possibilité d'en sélectionner d'autres
+\begin{itemize}
+\item Impossible de modifier une plage horaire sur laquelle une mission a été acceptée $\rightarrow$ go to CU: Annulation
+\end{itemize}
+\item Le système demande à l'étudiant de valider sa modification
+\item L'étudiant valide son emploi du temps $\rightarrow$ go to P1
+\item L'étudiant ne valide pas sa modification $\rightarrow$ go to P2
+
+\end{enumerate}
+
+
+\end{enumerate}
+\item L'étudiant sélectionner une case lui permettant de dupliquer l'emploi du temps du mois au mois suivant et au mois d'après\\
+\end{enumerate}
+
+Post condition: 	
+\begin{itemize}
+\item P1: L'emploi du temps de l'étudiant a été modifié avec succès
+\item P2 : L'étudiant a annulé ses modifications, son emploi du temps est vierge ou similaire à la précédente version.\\	
+\end{itemize}
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: Emploi du temps à modifier.
+\item Sortie: Emploi du temps à modifier ou emploi du temps modifié.
+\end{itemize}
+\newpage
+\subsubsection*{Spécification Détaillée}
+Scripts
+\begin{itemize}
+
+\item \textbf{ConsultationProfilUtilisateur.php} : Cette page permet de se connecter à la base de données grâce à connect.php et d'afficher les informations de l'utilisateur en utilisant son ID transmis par \$\_SESSION. Les informations proviennent de la table users et varient en fonction du statut de l'utilisateur (Etudiant ou
+Famille). 
+Pour les étudiants, les commentaires provenant de la table commentaire sont affiché toujours en utilisant le même ID. Ils sont disposés sous la forme d'un formulaire pour pouvoir permettre le signalement de commentaires inappropriés par l'utilisateur en transmettant l'ID des commentaires.
+Les contrats de l'utilisateur sont affichés, toujours grâce à l'ID de l'utilisateur, depuis la table bookings. En fonction du statut du contrat, il sera affiché dans une rubrique plutôt qu'une autre.
+\item \textbf{ModificationProfilUtilisateur.php} : Précédemment décrite, cf \ref{titi}
+\item \textbf{Calendrier/calendar\_etudiant.php} : Page qui permet de gérer son emploi du temps. En rouge s'affiche les créneaux non renseignés par l'étudiant ( de base tout le calendrier ). L'étudiant sélectionne les jours où il est disponible et les créneaux par tranche de 30 minutes ( les créneaux séléctionnés s'affichent en vert, étudiant disponible ). S'il est réservé par une famille, le créneau s'affichera en orange.
+\item \label{contrats} \textbf{case\_contrats.php} : Script permettant de récupérer les données relatives aux contrats en fonction du statut. 
+
+\item La création du calendrier comporte trois fichiers principaux :\\
+book\_slots.php; calendar\_famille.php et class\_calendar.php\\
+
+\item \textbf{class\_calendar.php}: permet dans un premier temps à l'aide de variables facilement modifiables de gérer les jours autorisés de booking sur le site, mais aussi les horaires de départ d'une journée et de fin, la taille des créneaux etc.
+
+\item \textbf{calendar.php }:Permet l'initialisation du calendrier via l'appel de la méthode make\_calendar() du fichier class\_calendar.php. On initialise ce calendrier par rapport au jour, au mois et à l'année renseignés dans la barre de recherche de la page Accueil.php.
+
+
+
+\item \textbf{ book\_slots.php}: permet de récupérer l'ensemble des créneaux cochés par l'étudiant, de les séparer en sous-créneaux individuels qui seront stockés dans la base de donnée.
+
+On crée donc dans la table bookings une ligne par créneau avec l'heure de départ et l'heure de fin du créneau, le champ login de la base de donnée égal à l'id de l'étudiant de la table users, id\_famille égal à l'id de la famille qui réserve de la table users et enfin on stocke le prix du créneau dans la base de données.
+
+Ce fichier permet également de s'assurer que le prix total ne dépasse pas une variable seuil (facilement modifiable), dans le cas contraire le contrat devra être validé par un administrateur (c'est à dire proposé aux deux intervenants).
+
+L'acceptation d'un contrat passe également par une nouvelle sécurité qu'est le renseignement à nouveau du nom d'utilisateur et du mot de passe lié au compte afin de s'assurer que ce soit bien le propriétaire du compte qui réalise la réservation. \\
+\end{itemize}
+Fonctions
+\begin{itemize}
+
+\item \textbf{make\_calendar()}: Est la fonction principale et permet de créer le calendrier, elle assure le positionnement par rapport au jour actuel mais également permet de définir les mois passés, les mois à suivre, l'appel à la méthode d'import du prix (Change\_cost() ) mais aussi la vérification des créneaux déjà bookées ( make\_booking\_array() ) et de ceux qui restent libres etc.\\
+
+\item \textbf{Change\_cost()}: Permet d'importer depuis la base de donnée propre au profil de l'étudiant consulté son prix mais également les taux du site (jours fériés, tarifs nocturnes post 18 heure etc.).\\
+
+\item \textbf{make\_booking\_array()}: Permet de définir si oui ou non un créneau a déjà été réalisé ou non. On calcule également le nombre de créneaux par jours en fonctions des paramètres initialement définis (horaire de départ \& de fin d'une journée ainsi que la durée d'un créneau). Cette méthode fait appel à la méthode make\_days\_array().\\
+
+\item \textbf{ make\_days\_array()}: Permet de calculer le nombre de jours dans le mois courant mais également dans les autres mois.\\
+
+\item \textbf{ calendar\_top() }: Crée un header au calendrier permettant d'accéder facilement aux mois précédents \& aux mois suivants. Cette méthode permet également d'afficher le mois courant.\\
+
+\item \textbf{ booking\_form()}: Affiche les créneaux disponibles dans la journée si l'utilisateur clique sur une journée spécifique dans le calendrier.\\
+
+\item \textbf{ basket()}: permet de renseigner le panier résultant des créneaux cochés dans le booking\_form().\\
+
+\end{itemize}
+
+Utilisation de javascript afin de pouvoir cocher les créneaux d'intérêt, et en fonction des modifications changer en temps réel la variable basket correspondant au prix total du panier (appelé dans la méthode basket() du class\_calendar.php
+
+
+\newpage
+
+\item\subsection{\textbf{Visite du site}}\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+
+Acteurs: Tous utilisateurs non connectés\\
+Pré-condition: L'utilisateur est sur la page principale du site \\
+
+Scénario nominal:\\
+
+\textbf{ $\bullet$ Consultation de prestataires hors connexion }
+\begin{enumerate}
+\item L'utilisateur entre code postal, date voulue (plage horaire / nombre d'heures), nombre d'enfant
+\item L'utilisateur sélectionne "Rechercher" pour valider sa recherche
+\item Le système traite les informations
+\item Le système recherche les étudiants qui sont à proximité, ils sont sélectionnés grâce à leur code postal
+\begin{enumerate}
+\item Le système renvoie à l'utilisateur les différents profils d'étudiants correspondant\\\underline{ mais n'affiche que très peu d'informations, affiche seulement photo, nom, prénom, description perso}
+\item Le système n'a pas trouvé de babysitter et propose d'élargir la recherche $\rightarrow$ go to 1
+\end{enumerate}
+\item Le système propose à l'utilisateur de se connecter ou de consulter en accès libre les données chargées en 3
+\begin{enumerate}
+\item L'utilisateur sélectionne "S'inscrire" $\rightarrow$ go to CU: Inscription
+\item L'utilisateur sélectionne "Se connecter" $\rightarrow$ go to CU: connexion
+\item L'utilisateur sélectionne "Ignorer" $\rightarrow$ go to 3a 
+\end{enumerate}
+\item L'utilisateur a le choix de
+\begin{enumerate}
+\item Sélectionner un prestataire pour accéder à son profil $\rightarrow$ go to P1
+\item Retourner à la page d'accueil\\
+\end{enumerate}
+\end{enumerate}
+
+
+Post condition: 	
+\begin{itemize}
+\item P1: L'utilisateur consulte le prestataire sélectionné\\
+
+
+\end{itemize}
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: Utilisateur UIC ou autre voulant consulter des prestataires.
+\item Sortie: Utilisateur ayant consulté des informations limitées ou non sur des prestataires.\\
+\end{itemize}
+
+\textbf{ $\bullet$ Contacter le site web}
+\begin{enumerate}
+\item L'utilisateur sélectionne "Contact"
+\item Le système le redirige en bas de la page
+\item L'utilisateur a accès au information nécessaires pour contacter l'équipe qui gère le site $\rightarrow$ go to P1'\\
+\end{enumerate}
+Post condition: 	
+\begin{itemize}
+\item P1': L'utilisateur contacte les administrateurs\\
+\end{itemize}
+
+Status Entrée/Sortie': 	
+\begin{itemize}
+\item Entrée: Tout utilisateur ayant une question.
+\item Sortie: Utilisateur ayant posé sa question.
+\end{itemize}
+\subsubsection*{Spécification Détaillée}
+Fonctions
+\begin{itemize}
+\item \textbf{try\_session()}: Cette fonction permet de rediriger un utilisateur inscrit et connecté vers la page AccueilConnecté.php grâce à la variable \$\_SESSION
+\end{itemize}
+Scripts
+\begin{itemize}
+\item \textbf{Accueil.php}: Ce script affiche les informations relatives au site et permet à un utilisateur non inscrit ou non connecté de s'inscrire ou de se connecter ainsi que d'effectuer une première visualisation partielle des prestataires qui proposent leurs services. Cette page permet aussi de contacter l'équipe du site grâce à la fonction mailto en php.\end{itemize}\newpage
+
+
+\item\subsection{\textbf{Consultation du profil personnel}}\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+
+Acteurs: Familles et prestataires\\
+Pré-condition: L'acteur est sur la page principale du site \\
+
+Scénario nominal:\\
+\begin{enumerate}
+\item L'acteur sélectionne "Mon profil"
+\item Le système affiche une page contenant le profil de l'acteur 
+\item L'utilisateur est un étudiant :
+
+\begin{enumerate}
+    \item L'étudiant peut consulter son profil (informations personnelles) et les commentaires/notes qui lui ont été laissés $\rightarrow$ go to P1
+    \end{enumerate}
+   \item L'utilisateur est une famille :
+    \begin{enumerate}
+    \item La famille peut consulter son profil (informations personnelles) mais ne voit pas les commentaires/notes qui lui ont été laissés $\rightarrow$ go to P1\\
+    \end{enumerate}
+\end{enumerate}
+
+Post condition: 	
+\begin{itemize}
+\item P1: L'acteur a consulté son profil\\
+
+
+\end{itemize}
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: UIC (famille ou étudiant) voulant consulter son profil personnel.
+\item Sortie: UIC ayant son profil personnel complet ou non.\\
+\end{itemize}
+\subsubsection*{Spécification Détaillée}
+
+Scripts
+\begin{itemize}
+\item \textbf{ConsultationProfilUtilisateur.php}: Cette page permet de se connecter à la base de données grâce à connect.php et d'afficher les informations de l'utilisateur en utilisant son ID transmis par \$\_SESSION. Les informations proviennent de la table users et varient en fonction du statut de l'utilisateur (Etudiant ou
+Famille). 
+Pour les étudiants, les commentaires provenant de la table commentaire sont affiché toujours en utilisant le même ID. Ils sont disposés sous la forme d'un formulaire pour pouvoir permettre le signalement de commentaires inappropriés par l'utilisateur en transmettant l'ID des commentaires.
+Les contrats de l'utilisateur sont affichés, toujours grâce à l'ID de l'utilisateur, depuis la table bookings.
+Les utilisateurs peuvent agir sur les contrats. L'étudiant peut accepter dans un premier temps la mission ou la refuser. Si l'étudiant a accepté la mission, la famille et l'étudiant peuvent annuler cette mission. Si la mission a été effectuée, les deux partis peuvent s'évaluer et la famille peut déclarer un litige. En fonction du statut du contrat, il sera affiché dans une rubrique plutôt qu'une autre. 
+\item \textbf{case\_contrats.php}: Script permettant de récupérer les données relatives aux contrats en fonction du statut. 
+\item \textbf{decision\_contrat.php}: Traite les données envoyées depuis "ConsultationProfilUtilisateur.php" ( Accepter / Refuser / Annuler / Déclarer un litige) et met à jour les statuts des contrats dans la table booking. Ce script gère les différents cas d'annulation ( $>48h$ ou $<48h$ ) et la déclaration d'un litige. Il permet également d'envoyer un e-mail lorsqu'il y a acceptation / refus / ou annulation.
+\end{itemize}\newpage
+\item \subsection{\textbf{Demande de prestataire}}\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+
+Acteurs: Utilisateur famille\\
+Pré-condition: L'utilisateur est sur le site et connecté à son compte \\
+
+Scénario nominal:\\
+\begin{enumerate}
+\item L'utilisateur entre code postal, date voulue (plage horaire / nombre d'heures), nombre d'enfants
+\item L'utilisateur sélectionne "Rechercher" pour valider sa recherche
+\item Le système traite les données envoyées
+\item le système filtre les étudiants à proximité grace à leur code postal
+\begin{enumerate}
+\item Le système renvoie à l'utilisateur les différents profils d'étudiants correspondant (note visible) ainsi qu'une évaluation du prix.
+\item Le système n'a pas trouvé de babysitter  $\rightarrow$ go to 1
+\end{enumerate}
+\item L'utilisateur à plusieurs choix
+\begin{enumerate}
+\item L'utilisateur peut sélectionner un profil 
+\item L'utilisateur peut ré-effectuer une recherche $\rightarrow$ go to 1
+\end{enumerate}
+\item Le profil s'ouvre dans un nouvel onglet
+\item L'utilisateur a accès à toute les informations du profil (commentaires, etc...) et
+\begin{enumerate}
+\item L'utilisateur sélectionne "contacter"
+\item L'utilisateur peut fermer l'onglet $\rightarrow$ go to 3a
+\end{enumerate}
+\item Le système affiche une fenêtre de validation
+\begin{enumerate}
+\item L'utilisateur valide et le système prends en compte la requête $\rightarrow$ P1
+\item L'utilisateur choisit de ne pas valider $\rightarrow$ go to 6\\
+\end{enumerate}
+\end{enumerate}
+
+Post condition: 	
+\begin{itemize}
+\item P1: Le système a envoyé une demande de mission détaillée (nombre d'enfant, date, rémunération, lieux) à un étudiant\\
+\end{itemize}
+
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: UIC (famille) voulant reserver un prestataire.
+\item Sortie: UIC (famille) ayant réservé un prestataire ou non.\\
+\end{itemize}\subsubsection*{Spécification Détaillée}
+
+Scripts
+\begin{itemize}
+\item  \textbf{ResultatConnecte.php} : \\Récupère les \$\_POST de AccueilConnecte.php, puis va chercher dans la
+BDD les étudiants dont les champs répondent à la requête. SI il n'y a pas de résultats ou
+trop peu, le bouton "Elargir la recherche?" reprend le code postal en prenant cette fois les 
+2 premiers caractères et renvoie sur la même page à l'aide d'un \$\_GET le code postal raccourci,
+toujours le même nombre d'enfants et même plage horaire.
+\item  \label{kiki}\textbf{ConsultationProfilUtilisateurTiers.php} : \\
+Cette page permet de se connecter à la base de données grâce à connect.php et d'afficher les informations d'un utilisateur visité en utilisant l'ID de ce dernier transmis par \$\_POST. Les informations proviennent de la table users et varient en fonction du statut de l'utilisateur (Etudiant ou Famille). 
+Les commentaires provenant de la table commentaire sont affiché toujours en utilisant le même ID. Ils sont disposés sous la forme d'un formulaire pour pouvoir permettre le signalement de commentaires inappropriés par l'utilisateur en transmettant l'ID des commentaires.
+Si l'utilisateur consultant est un étudiant, il pourra soit accepter ou refuser l'offre de contrat soit revenir directement à son profil.
+Si l'utilisateur consultant est une famille, il pourra soit enclencher la mise en forme d'un contrat soit revenir à la recherche d'étudiants.\\
+\end{itemize}
+Fonctions
+\begin{itemize}
+\item \textbf{substr()}: Fonction php qui permet de récupérer seulement les deux premiers caractères du code postal.
+\end{itemize}\newpage
+
+\item \subsection{\textbf{Acceptation du contrat }}\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+
+
+Acteurs: Prestataires inscrits et connectés\\
+Pré-condition : Le prestataire est alerté d'une nouvelle offre/a une nouvelle offre\\
+
+Scénario nominal:\\
+\begin{enumerate}
+\item L'étudiant se connecte grâce à ses identifiants
+\item L'étudiant va sur son profil/onglet mission
+\item L'étudiant consulte l'offre proposée et peut accéder au profil complet de la famille (informations personnelles + commentaires)
+\item Le système affiche l'adresse E-mail de la famille
+\item Le prestataire doit accepter ou refuser l'offre  
+\begin{enumerate}
+\item Le prestataire accepte la mission $\rightarrow$ go to P1
+\item Le prestataire refuse l'offre, son créneau est toujours libre $\rightarrow$ go to P2
+\end{enumerate}
+\item Son créneau est bloqué et réservé pour la famille $\rightarrow$ go to P1\\
+\end{enumerate}
+
+Post condition: 	
+\begin{itemize}
+\item P1: Le prestataire a accepté l'offre, le créneau correspondant est réservé, un mail est envoyé pour informer la famille et lui demander de payer.
+\item P2: Le prestataire a refusé l'offre, pas de modification, un mail est envoyé pour informer la famille du refus de l'offre. \\
+\end{itemize}
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: UIC (étudiant) sollicité pour une mission.
+\item Sortie: UIC (étudiant) missionné ou non.\\
+\end{itemize}
+
+\newpage
+\subsubsection*{Spécification Détaillée}
+Scripts
+\begin{itemize}
+\item \textbf{ConsultationProfilUtilisateur.php}:\\ Cette page permet de se connecter à la base de données grâce à connect.php et d'afficher les informations de l'utilisateur en utilisant son ID transmis par \$\_SESSION. Les informations proviennent de la table users et varient en fonction du statut de l'utilisateur (Etudiant ou
+Famille). 
+Pour les étudiants, les commentaires provenant de la table commentaire sont affiché toujours en utilisant le même ID. Ils sont disposés sous la forme d'un formulaire pour pouvoir permettre le signalement de commentaires inappropriés par l'utilisateur en transmettant l'ID des commentaires.
+Les contrats de l'utilisateur sont affichés, toujours grâce à l'ID de l'utilisateur, depuis la table bookings.
+Les utilisateurs peuvent agir sur les contrats. L'étudiant peut accepter dans un premier temps la mission ou la refuser. Si l'étudiant a accepté la mission, la famille et l'étudiant peuvent annuler cette mission. Si la mission a été effectuée, les deux partis peuvent s'évaluer et la famille peut déclarer un litige. En fonction du statut du contrat, il sera affiché dans une rubrique plutôt qu'une autre. 
+\item \textbf{case\_contrats.php}: \\Script permettant de récupérer les données relatives aux contrats en fonction du statut. 
+\item \textbf{decision\_contrat.php}:\\ Traite les données envoyées depuis "ConsultationProfilUtilisateur.php" ( Accepter / Refuser / Annuler / Déclarer un litige) et met à jour les statuts des contrats dans la table booking. Ce script gère les différents cas d'annulation ( $>48h$ ou $<48h$ ) et la déclaration d'un litige. Il permet également d'envoyer un e-mail lorsqu'il y a acceptation / refus / ou annulation.
+
+\end{itemize}
+Fonctions
+\begin{itemize}
+\item \textbf{recup\_data\_contrat\_unlock\_etudiant(\$bdd)}:\\
+récupère des données de la base de données (bdd) pour un étudiant et une famille suite à une demande de réservation par la famille de l'étudiant en question. Le statut est égale à 1.
+\item \textbf{recup\_data\_contrat\_lock\_etudiant(\$bdd)}:\\
+récupère des données de la base de données (bdd) pour un étudiant et une famille suite à l'acceptation d'une mission par l'étudiant. Le statut est égale à 2.
+\item \textbf{recup\_data\_contrat\_unlock\_famille\$(bdd)}:\\
+récupère des données de la base de données (bdd) pour un étudiant et une famille suite à une demande de réservation par la famille de l'étudiant en question. Le statut est égale à 1.
+\item \textbf{recup\_data\_contrat\_lock\_famille(\$bdd)}:\\
+récupère des données de la base de données (bdd) pour un étudiant et une famille suite à l'acceptation d'une mission par l'étudiant. Le statut est égale à 2.
+\item \textbf{recup\_contrat\_passes\_famille(\$bdd)}:\\
+récupère les contrats passés de la famille inférieurs à 48h. Validation est égale à 1.
+\item \textbf{recup\_contrat\_passes\_etudiant(\$bdd)}:\\
+récupère les contrats passés des étudiants inférieurs à 48h. Validation est égale à 1.
+
+\end{itemize}
+
+
+\newpage
+
+\item \subsection{\textbf{Paiement du prestataire}}\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+
+Acteurs: Famille inscrites et identifiées\\
+Pré-condition: Le prestataire a accepté l'offre \\
+
+Scénario nominal:\\
+\begin{enumerate}
+\item La famille se connecte sur le site
+\item Le système redirige la famille pour le paiement 
+(Redirection vers la page PayPal)
+\begin{enumerate}
+\item La famille remplit les champs nécessaires
+\item La famille peut annuler le paiement avant de remplir les champs $\rightarrow$ go to P2
+\end{enumerate}
+\item La famille valide ou invalide le formulaire
+\begin{enumerate}
+\item La famille valide les champs
+\item  La famille peut annuler le paiement après avoir rempli les champs  $\rightarrow$ go to P2
+\end{enumerate}
+\item Le système vérifie les informations
+\begin{enumerate}
+\item Les champs sont tous remplis correctement
+\item Les champs de ne sont pas remplis correctement  $\rightarrow$ Go to 2a
+\end{enumerate}
+\item La famille confirme la validation
+\begin{enumerate}
+\item La famille sélectionne: "Oui"
+\item La famille sélectionne: "Non"  $\rightarrow$  Go to P2
+\end{enumerate}
+\item Paiement validé  $\rightarrow$  Go to P1\\
+\end{enumerate}
+
+Post condition: 	
+\begin{itemize}
+\item P1: Le paiement est effectué, l'argent est bloqué jusqu'à 48h après la garde, l'étudiant est informé
+\item P2: Le paiement est annulé\\
+\end{itemize}
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: Prestataire non rémunéré.
+\item Sortie: Prestataire rémunéré ou non.\\
+\end{itemize}
+\newpage\subsubsection*{Spécification Détaillée}
+Scripts
+\begin{itemize}
+\item \textbf{Calendrier/calendar\_etudiant.php} :\\ Page qui permet de gérer son emploi du temps. Lorsque la famille recherche un étudiant, et qu'il en séléctionne un. Il est redirigé vers le calendrier afin de réserver les créneaux qui lui conviennent. Il réservera ensuite l'étudiant en entrant son login. Une fois le créneau validé, il sera rediriger vers une page Paypal pour procéder au virement. 
+\item \textbf{ConsultationProfilUtilisateur.php}:\\ Cette page permet de se connecter à la base de données grâce à connect.php et d'afficher les informations de l'utilisateur en utilisant son ID transmis par \$\_SESSION. Les informations proviennent de la table users et varient en fonction du statut de l'utilisateur (Etudiant ou Famille). 
+Pour les étudiants, les commentaires provenant de la table commentaire sont affiché toujours en utilisant le même ID. Ils sont disposés sous la forme d'un formulaire pour pouvoir permettre le signalement de commentaires inappropriés par l'utilisateur en transmettant l'ID des commentaires.
+Les contrats de l'utilisateur sont affichés, toujours grâce à l'ID de l'utilisateur, depuis la table bookings.
+Les utilisateurs peuvent agir sur les contrats. L'étudiant peut accepter dans un premier temps la mission ou la refuser. Si l'étudiant a accepté la mission, la famille et l'étudiant peuvent annuler cette mission. Si la mission a été effectuée, les deux partis peuvent s'évaluer et la famille peut déclarer un litige. En fonction du statut du contrat, il sera affiché dans une rubrique plutôt qu'une autre. 
+Si le prix contrat est trop élévé le statut passe à 3, et un admin doit intervenir. Suite à un litige si l'admin ne donne pas suite au litige, il peut débloquer le paiement. Si il n'y a pas de litige, les fonds sont débloqués après 48h et l'étudiant est payé.
+\item \textbf{case\_contrats.php}:\\ Script permettant de récupérer les données relatives aux contrats en fonction du statut. 
+\item \textbf{Update.php}:\\ Passe les anciens contrats à validation =1. 
+\end{itemize}
+Fonctions
+\begin{itemize}
+\item \textbf{recup\_data\_contrat\_unlock\_etudiant(\$bdd)}:\\
+Récupère des données de la base de données (bdd) pour un étudiant et une famille suite à une demande de réservation par la famille de l'étudiant en question. Le statut est égale à 1.
+\item \textbf{recup\_data\_contrat\_lock\_etudiant(\$bdd)}:\\
+Récupère des données de la base de données (bdd) pour un étudiant et une famille suite à l'acceptation d'une mission par l'étudiant. Le statut est égale à 2.
+\item \textbf{recup\_data\_contrat\_unlock\_famille\$(bdd)}:\\
+Récupère des données de la base de données (bdd) pour un étudiant et une famille suite à une demande de réservation par la famille de l'étudiant en question. Le statut est égale à 1.
+\item \textbf{recup\_data\_contrat\_lock\_famille(\$bdd)}:\\
+Récupère des données de la base de données (bdd) pour un étudiant et une famille suite à l'acceptation d'une mission par l'étudiant. Le statut est égale à 2.
+\item \textbf{recup\_contrat\_passes\_famille(\$bdd)}:\\
+Récupère les contrats passés de la famille inférieurs à 48h. Validation est égale à 1.
+\item \textbf{recup\_contrat\_passes\_etudiant(\$bdd)}:\\
+Récupère les contrats passés des étudiants inférieurs à 48h. Validation est égale à 1.
+
+\end{itemize}
+\newpage
+\item\subsection{\textbf{Annulation} }\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+
+Acteurs: Utilisateurs inscrits et connectés\\
+Pré-condition: Contrat en cours \\
+
+Scénario nominal:\\
+\begin{enumerate}
+\item L'utilisateur se connecte grace à ses identifiants ( voir CU: Connexion )
+\item L'utilisateur accède à son profil et sélectionne "Mission"
+\item Le système affiche les contrats de l'utilisateur
+\item L'utilisateur sélectionne la mission qu'il souhaite annuler
+\item Le système propose une confirmation de l'annulation de la mission de l'utilisateur 
+\begin{enumerate}
+\item L'utilisateur valide l'annulation
+\item L'utilisateur annule l'annulation $\rightarrow$ go to P2
+\end{enumerate}
+
+\item L'utilisateur est un étudiant :
+\begin{enumerate}
+    \item Si la mission aboutit dans plus de 48 heures: la mission est annulée le créneau est libéré, la famille est remboursée $\rightarrow$ go to P1
+    \item Si la mission aboutit dans moins de 48 heures : la mission est annulée, le système modifie le taux d'annulation du prestataire, la famille est remboursée, le créneau est libéré $\rightarrow$ go to P1
+    \end{enumerate}
+   \item L'utilisateur est une famille :
+    \begin{enumerate}
+    \item Si la mission aboutit dans plus de 48 heures: La mission est annulée, le créneau du prestataire est libéré, la famille n'a rien est remboursée $\rightarrow$ go to P1
+    \item Si la mission aboutit dans moins de 48 heures : La mission est annulée, la totalité du paiement est tout de même effectuée $\rightarrow$ go to P1\\
+    \end{enumerate}
+\end{enumerate}
+
+Post condition: 	
+\begin{itemize}
+\item P1 : La mission est annulée
+\item P2 : La mission est toujours valide\\
+\end{itemize}
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: UIC (étudiant) missionné.
+\item Sortie: UIC (étudiant) missionné ou non.\\
+\end{itemize}
+\newpage
+\subsubsection*{Spécification Détaillée}
+
+Scripts
+\begin{itemize}
+\item \textbf{ConsultationProfilUtilisateur.php}:\\ Cette page permet de se connecter à la base de données grâce à connect.php et d'afficher les informations de l'utilisateur en utilisant son ID transmis par \$\_SESSION. Les informations proviennent de la table users et varient en fonction du statut de l'utilisateur (Etudiant ou
+Famille). 
+Pour les étudiants, les commentaires provenant de la table commentaire sont affiché toujours en utilisant le même ID. Ils sont disposés sous la forme d'un formulaire pour pouvoir permettre le signalement de commentaires inappropriés par l'utilisateur en transmettant l'ID des commentaires.
+Les contrats de l'utilisateur sont affichés, toujours grâce à l'ID de l'utilisateur, depuis la table bookings.
+Les utilisateurs peuvent agir sur les contrats. L'étudiant peut accepter dans un premier temps la mission ou la refuser. Si l'étudiant a accepté la mission, la famille et l'étudiant peuvent annuler cette mission. Si la mission a été effectuée, les deux partis peuvent s'évaluer et la famille peut déclarer un litige. En fonction du statut du contrat, il sera affiché dans une rubrique plutôt qu'une autre. 
+\item \textbf{case\_contrats.php}:\\ Script permettant de récupérer les données relatives aux contrats en fonction du statut. 
+\item \textbf{decision\_contrat.php}:\\ Traite les données envoyées depuis "ConsultationProfilUtilisateur.php" ( Accepter / Refuser / Annuler / Déclarer un litige) et met à jour les statuts des contrats dans la table booking. Ce script gère les différents cas d'annulation ( $>48h$ ou $<48h$ ) et la déclaration d'un litige. Il permet également d'envoyer un e-mail lorsqu'il y a acceptation / refus / ou annulation.
+\end{itemize}
+
+Fonctions
+\begin{itemize}
+\item \textbf{recup\_data\_contrat\_unlock\_etudiant(\$bdd)}:\\
+récupère des données de la base de données (bdd) pour un étudiant et une famille suite à une demande de réservation par la famille de l'étudiant en question. Le statut est égale à 1.
+\item \textbf{recup\_data\_contrat\_lock\_etudiant(\$bdd)}:\\
+récupère des données de la base de données (bdd) pour un étudiant et une famille suite à l'acceptation d'une mission par l'étudiant. Le statut est égale à 2.
+\item \textbf{recup\_data\_contrat\_unlock\_famille\$(bdd)}:\\
+récupère des données de la base de données (bdd) pour un étudiant et une famille suite à une demande de réservation par la famille de l'étudiant en question. Le statut est égale à 1.
+\item \textbf{recup\_data\_contrat\_lock\_famille(\$bdd)}:\\
+récupère des données de la base de données (bdd) pour un étudiant et une famille suite à l'acceptation d'une mission par l'étudiant. Le statut est égale à 2.
+\item \textbf{recup\_contrat\_passes\_famille(\$bdd)}:\\
+récupère les contrats passés de la famille inférieur à 48h. Validation est égale à 1.
+\item \textbf{recup\_contrat\_passes\_etudiant(\$bdd)}:\\
+récupère les contrats passés des étudiants inférieurs à 48h. Validation est égale à 1.
+\end{itemize}
+\newpage
+\item \subsection{\textbf{Évaluation prestataire/famille}}\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+
+Acteurs: Utilisateurs inscrits et connectés\\
+Pré-condition: Une mission vient d'être réalisée \\
+
+Scénario nominal:\\
+\begin{enumerate}
+\item L'utilisateur se connecte à son compte (voir CU: Connexion)
+\item Une notification du système propose à l'utilisateur d'évaluer sa mission précédente
+\begin{enumerate}
+\item L'utilisateur refuse, la notification est effacée $\rightarrow$  go to P2
+\item L'utilisateur accepte
+\end{enumerate}
+\item  L'utilisateur est renvoyé sur la page de son profil listant ses dernières missions
+\item  L'utilisateur attribue une note sur 5 et peut laisser un commentaire
+\item  Le système change les infos du profil utilisateur concerné $\rightarrow$ go to P1 \\
+
+\end{enumerate}
+
+Post condition: 	
+\begin{itemize}
+\item P1: Un utilisateur a reçu une évaluation et son profil a été modifié en conséquence
+\item P2: Aucune évaluation ni modification \\
+\end{itemize}
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: UIC (étudiant) ayant effectué une mission n'ayant pas reçu de commentaire.
+\item Sortie: UIC (étudiant) ayant effectué une mission ayant reçu un commentaire ou non.\\
+\end{itemize}\newpage
+\subsubsection*{Spécification Détaillée}
+Script
+\begin{itemize}
+\item \textbf{ConsultationProfilUtilisateur.php}:\\ Cette page permet de se connecter à la base de données grâce à connect.php et d'afficher les informations de l'utilisateur en utilisant son ID transmis par \$\_SESSION. Les informations proviennent de la table users et varient en fonction du statut de l'utilisateur (Etudiant ou
+Famille). 
+Pour les étudiants, les commentaires provenant de la table commentaire sont affiché toujours en utilisant le même ID. Ils sont disposés sous la forme d'un formulaire pour pouvoir permettre le signalement de commentaires inappropriés par l'utilisateur en transmettant l'ID des commentaires.
+Les contrats de l'utilisateur sont affichés, toujours grâce à l'ID de l'utilisateur, depuis la table bookings.
+Les utilisateurs peuvent agir sur les contrats. L'étudiant peut accepter dans un premier temps la mission ou la refuser. Si l'étudiant a accepté la mission, la famille et l'étudiant peuvent annuler cette mission. Si la mission a été effectuée, les deux partis peuvent s'évaluer et la famille peut déclarer un litige. En fonction du statut du contrat, il sera affiché dans une rubrique plutôt qu'une autre. 
+\item \textbf{Notation.php}:\\ Suite à une mission l'utilisateur commenter la préstation et la noter. Les notes vont de 1 à 5 ( 1 = Nul / 5 = Parfait ), et commenter la préstation. Les différentes informations seront envoyées dans la base de données par "commentaire\_bdd.php".
+\item \textbf{commentaire\_bdd.php}: \\Envoie les commentaires et notes des utilisateurs dans la base de données. Les commentaires seront ensuite visible sur le profil des utilisateurs.
+\end{itemize}\newpage
+\item\subsection{\textbf{Signalement d'un commentaire inapproprié}}\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+
+Acteurs: Utilisateurs inscrits et connectés\\
+Pré-condition:  L'utilisateur connecté consulte un profil et lit les avis \\
+
+Scénario nominal:\\
+\begin{enumerate}
+\item L'utilisateur observe un profil
+\item L'utilisateur repère un message abusif
+\item L'utilisateur sélectionne un jalon de signalisation
+\item Le système envoie un message aux administrateurs  $\rightarrow$ go to P1 \\
+\end{enumerate}
+
+Post condition :
+
+\begin{itemize}
+\item P1: Un message d'avertissement a été envoyé aux administrateurs au sujet d'un commentaire inapproprié\\
+\end{itemize}
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: Message non signalé.
+\item Sortie: Message définit comme inapproprié et signalé.\\
+\end{itemize}
+\subsubsection*{Spécification Détaillée}
+
+Scripts
+\begin{itemize}
+\item   \textbf{ConsultationProfilUtilisateur.php}: Script présenté en section \ref{titi}
+\item   \textbf{ConsultationProfilUtilisateurTiers.php}: Script présenté en section \ref{kiki}
+\item  \textbf{Moderation\_com.php} :
+Cette page récupère l'ID du ou des commentaires transmis en \$\_POST par une page de consultation de profil.
+le champs moderation de la table commentaire de ce(s) dernier(s) sera(ont) modifié(s) en "1". 
+Lorsque cette modification a été faite, un message de confirmation est affiché et renvoie automatiquement l?utilisateur sur la page précédente.
+\end{itemize}
+\newpage
+
+\item\subsection{\textbf{Modification d'un commentaire inapproprié}}\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+
+Acteurs: Admin ou super admin\\
+Pré-condition:  L'admin connecté a reçu une signalisation à propos d'un message abusif\\
+
+\begin{enumerate}
+\item L'admin observe le profil signalé
+\item  L'admin repère le message abusif
+\item  L'admin joue de son droit décisionnel :
+\begin{enumerate}
+\item Le message est supprimé $\rightarrow$  go to P1
+ \item Le message est indemne $\rightarrow$  go to P2\\
+\end{enumerate}
+
+\end{enumerate}
+
+Post condition :
+
+\begin{itemize}
+\item P1:  Le message abusif a été supprimé, le profil utilisateur est mis à jour, la note n'est pas modifiée
+\item P2 : Aucune modification\\
+\end{itemize}
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: Message définit comme inapproprié et signalé.
+\item Sortie: Message considéré inapproprié ou non (message supprimé ou ignoré).\\
+\end{itemize}
+\subsubsection*{Spécification Détaillée}
+
+Scripts
+\begin{itemize}
+\item \textbf{dash\_admin\_moderation.php}:\\ Ce script affiche la page de modération où les commentaires signalés sont affichés (appelés depuis la base de données) les uns à la suite de autres. Ce script envoie un formulaire au script suivant en fonction du choix de l'utilisateur. 
+\item \textbf{moderate\_comment.php}:\\ Ce script permet de modifier le caractère 'signalé' d'un commentaire dans la base de données ou de simplement le supprimer si nécessaire. Il nécessite l'envoie de l'array \$\_POST contenant le champ 'modifié' ou 'supprimé'. Le script redirige l'utilisateur vers la page de modération une fois la tâche accomplie. \\
+\end{itemize}
+
+Fonctions
+\begin{itemize}
+\item \textbf{get\_comments(\$bdd)}:\\ Cette fonction permet d'accéder à la base de données et d'afficher 
+ les données de l'utilisateur ayant laissé un commentaire signalé ainsi que le commentaire en question et les choix de l'utilisateur.
+ \end{itemize}
+\newpage
+
+\item\subsection{\textbf{Validation d'un profil}}\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+
+Acteurs: Admin ou super admin\\
+Pré-condition:  L'admin connecté a reçu une signalisation à propos d'un nouveau profil ou d'une modification de profil.\\
+
+\begin{enumerate}
+\item L'admin observe le profil signalé
+\item  L'admin joue de son droit décisionnel :
+\begin{enumerate}
+\item Le profil est acceptable $\rightarrow$  go to P1
+ \item Le profil est non conforme $\rightarrow$  go to P2\\
+\end{enumerate}
+
+\end{enumerate}
+
+Post condition :
+
+\begin{itemize}
+\item P1:  Le profil est validé
+\item P2 : Le profil est modéré et validé\\
+\end{itemize}
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: Profil en attente de validation
+\item Sortie: Profil validé ou modéré\\
+\end{itemize}
+\subsubsection*{Spécification Détaillée}
+Scripts
+\begin{itemize}
+\item \textbf{dash\_admin\_profile\_etu.php}: \\Ce script affiche la page de modération où les profils étudiants récemment créés ou signalés sont affichés (appelés depuis la base de données). Ce script envoie un formulaire au script moderate\_profile.php. 
+\item \textbf{dash\_admin\_profile\_fam.php}:\\ Idem pour les utilisateurs: famille
+\item \textbf{moderate\_profile.php}:\\ Ce script permet de modifier le caractère 'signalé' d'un profil dans la base de données ou de simplement le supprimer ou de le modifier si nécessaire. Il nécessite l'envoi de l'array \$\_POST contenant le champ 'ignoré', 'modifié' ou 'supprimé' ainsi que l'ID du profil pour un affichage cohérent. Le script redirige l'utilisateur vers la page de modération une fois la tâche accomplie. \\
+\end{itemize}
+
+Fonctions
+\begin{itemize}
+\item \textbf{get\_comments(\$bdd)}:\\ Cette fonction permet d'accéder à la base de données et d'afficher 
+ les données de l'utilisateur ayant laissé un commentaire signalé ainsi que le commentaire en question et les choix de l'utilisateur.
+ \end{itemize}\newpage
+
+
+
+\item\subsection{\textbf{Gestion des divers taux par les Admins}}\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+
+Acteurs: Admins du site\\
+Pré-condition: L'utilisateur est un Admin \\
+
+Scénario nominal:\\
+\begin{enumerate}
+\item L'utilisateur se connecte en tant qu'Admin
+\item Il accède à la grille des différents taux gérés par le site
+
+\item L'admin peut modifier les cas spéciaux ( taux jour férié, taux week-end, taux nuit )
+\item L'admin peut modifier le taux de commission prélevé par le site
+\item  Après chaque modifications le système propose une confirmation de la modification du taux $\rightarrow$ go to P1
+\item  L'admin annule la modification $\rightarrow$ go to p2
+\item Un mail stipulant que les conditions d'utilisations générales ont été modifiées est envoyé à tout les inscrits\\
+
+\end{enumerate}
+
+Post condition: 	
+\begin{itemize}
+\item P1: Le système a pris en compte la modification du taux
+\item P2: Aucun taux n'a été modifié\\
+\end{itemize}
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: Taux précédemment fixées.
+\item Sortie: Taux modifiés ou non; email envoyé ou non.\\
+\end{itemize}
+\subsubsection*{Spécification Détaillée}
+
+Scripts
+\begin{itemize}
+\item  \textbf{dash\_admin\_taux.php}:\\ Ce script affiche dans un formulaire les taux définis et appelés depuis la base de données grâce à la fonction get\_taux(\$bdd). Ce script permet de d'envoyer un formulaire au script suivant.
+ \item \textbf{Moderate\_taux.php}:\\ Ce script reçoit par la variable \$\_POST les informations relatives aux taux à modifier.\\
+
+\end{itemize}
+Fonctions
+\begin{itemize}
+\item \textbf{get\_taux(\$bdd)}: \\ Cette fonction prend en entrée les informations sur la base de données et renvoie les taux définis dans celle ci.
+\end{itemize}
+\newpage
+
+
+\item\subsection{\textbf{Création d'un compte Admin}}\vspace{1em}
+\subsubsection*{Spécification Fonctionnelle}
+
+Acteurs: Super-admin\\
+Pré-condition: Le super admin est connecté sur sa page d'administration\\
+
+Scénario nominal:\\
+
+\begin{enumerate}
+\item Le super admin sélectionne l'onglet "Ajout d'administrateurs"
+\item Le super admin renseigne un formulaire : adresse e-mail et mot de passe
+\item Le système vérifie la validité de l'adresse E-mail 
+\begin{enumerate}
+\item L'e-mail est validé, un nouveau compte a été créé  $\rightarrow$  go to P1
+\item Le-mail n'est pas validé  $\rightarrow$  go to 3\\
+\end{enumerate}\end{enumerate}
+
+Post condition:
+\begin{itemize}
+\item P1: L'admin a reçu un login et un mot de passe
+\end{itemize}
+
+Status Entrée/Sortie: 	
+\begin{itemize}
+\item Entrée: n administrateurs enregistrés.
+\item Sortie: n+1 administrateurs enregistrés.\\
+\end{itemize}
+
+\subsubsection*{Spécification Détaillée}
+
+Scripts
+\begin{itemize}
+\item  \textbf{dash\_admin\_nouvel\_admin.php}:\\ Ce script affiche des formulaires permettant d'ajouter ou de supprimer un administrateur de la base de données. Grâce à la fonction get\_admin(\$bdd), le script permet d'afficher les adresses mail des administrateurs (admin) présents dans la base.
+Cette page étant réservée exclusivement à l'administrateur 'super', la fonction which\_admin() se charge de définir le type d'administrateur. D'autre part l'accès aux pages administrateur est restreint pour les autres utilisateurs par la fonction try\_session().\\
+\end{itemize}
+Fonctions
+\begin{itemize}
+\item \textbf{get\_admin(\$bdd)}:  \\Cette fonction prend en entrée les informations sur la base de données et affiche les administrateurs définis dans celle ci.
+\item \textbf{inscription\_admin()}: \\Cette fonction prend en entrée les données transmises par la variable \$\_POST (email et mot de passe) et permet d'ajouter un administrateur à la base.
+\item \textbf{suppression\_admin()}:\\Cette fonction prend en entrée les données transmises par la variable \$\_POST (email ) et permet de supprimer un administrateur de la base.
+\item \textbf{which\_admin()}: \\Cette fonction renvoi un booléen permettant de définir à partir de la variable super globale \$\_session le type d'administrateur étant connecté. 
+\item \textbf{try\_session()}: \\Cette fonction est utilisé ici pour restreindre l'accès aux pages admins à des utilisateurs non connectés ou connectés en temps que famille ou étudiant. Cette fonction utilise la variable super globale \$\_session et redirige l'utilisateur en conséquence. 
+\end{itemize}
+\newpage
+
+\item\subsection*{\textbf{Autres scripts et fonctions importantes}}\vspace{1em}
+
+Scripts php
+\begin{itemize}
+\item  \textbf{connect.php}: \\Script utilisé dans la plupart des scripts de ce projet qui permet de se connecter à la base de données.  
+\item \textbf{logout.php}: Ce script permet de déconnecter un utilisateur connecté.
+\item \textbf{functions.php}: \\Script qui contient les fonctions relatives à l'interface étudiants et familles.
+\item \textbf{functions\_admin.php}: \\Script qui contient les fonctions relatives à l'interface administrateurs.\\
+
+\end{itemize}
+Fonctions
+\begin{itemize}
+\item{\textbf{logged\_in() :}} 
+Permet à un utilisateur déjà enregistré et connecté d'être redirigé vers la page des utilisateurs connectés sur le site.
+\item \textbf{autologout()}: Cette fonction permet de déconnecter un utilisateur après 1/2h.\\
+\end{itemize}
+
+Scripts CSS
+\begin{itemize}
+\item \textbf{Style\_profil.css}
+Ce CSS permet d'afficher les informations des pages de profils dans 5 à 6 rubriques dont l'une comporte une commande overflow:auto; permettant d'afficher les commentaire avec une barre de scrolling, ce qui nous a permis d'afficher tout les commentaires sans pour autant avoir une page qui paraisse surchargée.
+\item Le site a été conçu dans une optique de responsive design à l'aide des media query en css. C'est dans cette optique d'auto adaptabilité que nous avons permis un affichage optimisé quel que soit le support utilisé (testé sur les marques Samsungs, Ipad, Nvidia Shield K1, etc.). Si par exemple l'utilisateur décide de réaliser une partie de l'inscription sur son ordinateur, effecter une recherche et bloquer un créneau sur sa tablette et enfin valider le contrat suite à un mail reçu sur son portable; cela lui est tout à fait possible. 
+\end{itemize}
+
+\newpage
+\end{itemize}
+ \section{Analyse}
+ \subsection{Diagrammes de plus haut niveau}
+ Le projet met en jeux quatre types d'utilisateurs.\\
+\begin{figure}[h!]
+\includegraphics[scale=0.85]{figures/C_users}
+\caption{Utilisateurs et CU}
+\label{cas}
+\end{figure}
+
+\subsection{Diagrammes de classes métier}
+\includegraphics[scale=0.8]{figures/classes}\\
+\subsection{Modèle logique de la base de données}
+Modèle logique de la base de données (les tables avec les clés primaires et les clés étrangères - expliquez comment vous avez traduit l'heritage)\\
+\hspace{-4em}
+\includegraphics[scale=0.6]{figures/bdd}\\
+
+La base de données est répartie en 4 tables
+ \begin{itemize}
+\item Booking
+\item Commentaire
+\item Users
+\item Taux\_sites
+\end{itemize}
+\section{Conception}
+
+\subsection{Diagramme de séquence: modération d'un commentaire}\hspace{-2em}
+\includegraphics[angle=-90,scale=0.8]{figures/DS_moderation}\\
+ \section{Réalisation}
+   \subsection{Diagramme d'activité pour les quatre types d'utilisateurs}
+   \hspace{-3em}
+\includegraphics[scale=0.82]{figures/DA_admin}\vspace*{-7cm}\\
+\hspace*{1.5em}
+\includegraphics[scale=0.7]{figures/DA_inscript}\\
+
+\includegraphics[scale=0.8]{figures/DA_presta}\footnote{Diagrammes réalisés via lucidchart.com}
+\newpage
+\hspace{-2em}
+\includegraphics{figures/DA_prestataire}\\
+
+
+ 
+\clearpage
+\subsection{Tests fonctionnels}
+
+Nous avons pu tester tous nos cas, étant donné que notre site ne met pas en jeu des vies et n'implique pas d'erreurs lourdes de consequences, le tableaux des tests en annexe suffit à couvrir l'étendue des cas problématiques du site. Le fait que nous soyons six pour ce projet nous à permis de nous répartir la tache de chercher les failles et nous à permis de couvrir plus consciencieusement les différents cas et scénarios. 
+\section{Retrospective}
+\hspace{-2cm}
+
+Si le projet était à refaire nous repasserions en revue et avec plus de précision et d'attention les points suivants, qui, à terme auraient pu être mieux traités et auraient pu permettre de rendre le projet plus clair et réutilisable.\\\\
+\textbf{Production du site}
+ \begin{itemize}
+ \item\textbf{\textit{Les yeux plus gros que le ventre:}}\\ Dans une perspective de produire un produit fini et complet nous aurions pu attacher plus d'importance à l'analyse et à l'étude du sujet pour limiter notre travail à un produit fonctionnel que nous aurions pu par la suite mieux améliorer. Nous avons produit un travail complet fonctionnel et avons pu rajouter quelques fonctions non demandées mais en contre partie, les finitions ne sont pas celle que nous espérions. 
+
+\item \textbf{\textit{Plus de fonctions, moins de scripts}}: \\Nous avons majoritairement codés des scripts avec peu de fonctions à part entières. Nous pensons qu'avec plus de temps et dans une optique différente il aurait été possible de produire un ensemble de scripts plus organisés (moins nombreux, plus précis dans leurs fonctions). 
+\item \textbf{\textit{Plus d'anglais moins de 'fran-glais' ou pourquoi pas en français?}}:\\ Nous sommes conscients de l'importance que doit être attribuée à la compréhension du code pour permettre sa réutilisation d'une part et une possible implémentation future par d'autres personnes. C'est pour cela que si c'était à refaire, nous nous organiserions pour cadrer dès le début du projet de meilleurs base en ce qui concerne cette question. 
+\item\textbf{\textit{Un deuxième médiateur}}:\\ Cela aurait été pour le mieux, du moins en ce qui concerne un groupe de six.
+\item\textbf{\textit{C'est quoi Git?}}: \\Dans ce projet, nous avons d'abord commencés avec l'interface de partage Dropbox, la transition nécessaire à Git ne s'est faite que trop tardivement. L'apprentissage plus précoce des quelques lignes de commandes nécessaires à l'utilisation de GIT aurait  pu apporter un plus au projet dès son commencement.\\
+\end{itemize}
+\textbf{Logistique}
+\begin{itemize}
+\item\textbf{\textit{On se divise le projet en 6:}}\\ Pour ce projet nous avons du travailler à six. Étant donnée nos localisation géographique il à été difficile de se retrouver pour travailler. Si c'était à refaire nous nous organiserions des séances régulières pour monitorer l'avancement du travail et faciliter la communication dans le groupe.
+
+\end{itemize}
+\textbf{conception}
+\begin{itemize}
+\item\textbf{\textit{Qui sont nos étudiants?}}: \\ Nous avons décidé de vérifier l'identité de nos étudiants en leur demandant de notifier leur numéro de CNI, si c'était à refaire nous tenterions de mettre à terme cette idée et a vérifier l'exactitude des CNI.
+\item\textbf{\textit{Report de l'emploi du temp}}: \\ Nous avions lors de l'écriture des scénarios pensé à mettre un bouton report pour faciliter l'utilisation du site pour les étudiants, comme nous avons travailler à implémenter un emploi du temps en Java nous n'avons pas eu le temps de chercher à intégrer cette fonctionnalité
+\item\textbf{\textit{Mot de passe oublié}}: \\ En relisant nos spécifications fonctionnelles nous avons remarqué que la fonction mot de passe oubliée avait ironiquement été oubliée. 
+\item\textbf{\textit{Des plages horaires plus lisibles}}: \\ Nous avons décidé de permettre à un utilisateur de choisir ses disponibilité à la demi heure pour facilité l'accès aux étudiants par les familles. Ce faisant nous nous somme rendu compte que les créneaux n'étaient pas concatènés et apparaissent demi heure par demie heure. Pour facilité l'usage du site (validation de profil) nous aurions avec plus de temps peaufiner l'affichage des créneaux 'tout en un'.
+
+\end{itemize}
+
+
+
+ \clearpage
+  \newgeometry{left=1cm,bottom=0.5cm,top=0.5cm,right=1cm}
+\subsection{Captures Esitting}
+\begin{figure}[!ht]
+     \subfloat[Accueil\label{accueil}]{\hspace{-2em}
+       \includegraphics[scale=0.45]{figures/es_accueil}
+     }
+   \hfill
+     \subfloat[Accueil Déconnecté\label{dash}]{\hspace{-2em}%
+       \includegraphics[scale=0.45]{figures/es_accueil_deco}
+       
+     }
+     
+      \caption{Accueil: E-sitting}
+     \label{accueil}
+     
+   \end{figure}
+     \clearpage
+   \begin{figure}[!ht]
+     \subfloat[Tableau de bord des administrateurs: Accueil\label{accueil}]{\hspace{-2em}
+       \includegraphics[scale=0.45]{figures/es_dash}
+     }
+     \hfill
+     \subfloat[Tableau de bord des administrateurs: Gestion des taux\label{dash}]{\hspace{-2em}%
+       \includegraphics[scale=0.45]{figures/es_taux}
+     }
+     
+      \caption{Tableau de bord des administrateurs E-sitting}
+     \label{dash}
+   \end{figure}
+    
+   \clearpage
+ \begin{figure}[!ht]
+     \subfloat[Tableau de bord des administrateurs: Gestion profils\label{dashl}]{\hspace{-2em}
+       \includegraphics[scale=0.45]{figures/es_modif_profil}
+     }
+     \hfill
+     \subfloat[Tableau de bord des administrateurs: Gestion des administrateurs\label{dash}]{\hspace{-2em}%
+       \includegraphics[scale=0.45]{figures/es_new_admin}
+     }
+     
+      \caption{Tableau de bord des administrateurs E-sitting - suite}
+     \label{dash}
+   \end{figure}
+    
+   \clearpage
+   \begin{figure}[!ht]
+     \subfloat[Connexion Echouée: Mauvais mot de passe\label{Co}]{\hspace{-2em}%
+       \includegraphics[scale=0.65]{figures/es_fail}
+     }
+     \hfill
+     \subfloat[Connexion Echouée: Mauvais identifiant\label{Co}]{%
+       \includegraphics[scale=0.55]{figures/es_fail2}
+     }
+  \caption{Connexion E-sitting }
+     \label{dash}
+   \end{figure}
+     \clearpage
+   \begin{figure}[!ht]
+     \subfloat[Connexion Echouée: Profil en attente de modération\label{Co}]{\hspace{-2em}%
+       \includegraphics[scale=0.55]{figures/es_fail3}
+     }
+     \hfill
+     \subfloat[Inscription: Premier choix\label{dash}]{%
+       \includegraphics[scale=0.45]{figures/es_choice}
+     }
+  \caption{Connexion E-sitting - suite}
+     \label{dash}
+   \end{figure}
+    \clearpage
+    \begin{figure}[!ht]
+     \subfloat[Inscription: Famille\label{Co}]{\hspace{-2em}%
+       \includegraphics[scale=0.45]{figures/es_ins_fam}
+     }
+     \hfill
+     \subfloat[Inscription: Étudiant\label{dash}]{%
+       \includegraphics[scale=0.45]{figures/es_ins_etu}
+     }
+  \caption{Inscription E-sitting - suite}
+     \label{dash}
+   \end{figure}
+   \clearpage
+    \begin{figure}[!ht]
+     \subfloat[Visite profil personnel: Informations; commentaire à signaler\label{Co}]{\hspace{-2em}%
+       \includegraphics[scale=0.47]{figures/es_profile}
+     }
+     \hfill
+     \subfloat[Visite profil personnel - suite : missions  \label{dash}]{%
+       \includegraphics[scale=0.47]{figures/es_missions}
+     }
+  \caption{E-sitting - suite}
+     \label{dash}
+   \end{figure}
+   \clearpage
+    \begin{figure}[!ht]
+     \subfloat[Notation: Famille, étudiants\label{Co}]{\hspace{-2em}%
+       \includegraphics[scale=0.47]{figures/es_notation}
+     }
+     \hfill
+     \subfloat[Calendrier de disponibilité étudiant\label{dash}]{%
+       \includegraphics[scale=0.47]{figures/es_etu}
+     }
+  \caption{E-sitting - suite}
+     \label{dash}
+   \end{figure}
+
+\newpage
+\begin{appendix}
+\newgeometry{left=.1cm,bottom=0.1cm,top=0.1cm}
+\section{Gantt chart}
+\includegraphics[angle=90,scale=0.4]{figures/gantt}
+\newpage
+
+\section{Annexe Code php: Édition du profil}
+\begin{verbatim}
+ <!-- On récupère les anciennes données enregistrées dans la base de données correspondantes à l'utilisateur -->
+<?php include("BDProfilUtilisateur.php");
+autologout();
+ ?>
+<DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style_inscription.css" />
+        <link rel="stylesheet" href="style_general.css" />
+        <link rel="stylesheet" href="style_general_connect.css" />
+        <title>E-Sitting - Le babysitting sans bouger de chez vous</title>
+    </head>
+    <body>
+
+        <div id = "bloc_page">
+            <header>
+                <div id="titre_principal">
+                    <div id="logo">
+                        <img src="Pictures/logo.png" alt="Logo E-sitting" />
+                    </div>
+    <div id="deconnexion">
+        <a href="logout.php" class="myButtonConnected">Déconnexion</a>
+    </div>
+    <div id="bonjour"><?php
+      if ($_SESSION['type']=='Super' or $_SESSION['type']=='Admin')
+      {
+    echo(  "<a href='dash_admin.php' class='myButtonConnected'>Dashboard".  "</a>" );
+  }
+    else
+    {
+   echo("<a href='#' class='myButtonConnected'>Bonjour ". $_SESSION['prenom'] . " ". $_SESSION['nom'] . "  </a>");
+      }?></div>
+                </div>
+            </header>
+        <div id = "Menu_Principal">
+                <ul class="fancyNav" id="myTopnav">
+                    <li id="home"><a href="AccueilConnecte.php" class="homeIcon">Accueil</a></li>
+                    <li><a href="#">Annonces</a></li>
+                    <li><a href="AccueilConnecte.php#Whoarewe">Qui sommes-nous ?</a></li>
+                    <li><a href="AccueilConnecte.php#Esitter">Rejoignez l'aventure</a></li>
+                    <li><a href="AccueilConnecte.php#Paiements">Tarifs & Paiements</a></li>
+                    <li><a href="ConsultationProfilUtilisateur.php">Profil</a></li>
+                    <li class="icon">
+                    <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">?</a> 
+                    <!-- Initialisation du bouton qui apparait en cas de trop petite image (voir media query) -->
+                    </li>
+                </ul>
+        </div>
+            <script>
+                function myFunction() {
+                    var x = document.getElementById("myTopnav");
+                    if (x.className === "fancyNav") {
+                        x.className += " responsive";
+                    } else {
+                        x.className = "fancyNav";
+                    }
+                }
+            </script>
+            <section>
+                <article>
+
+
+
+                    <!-- On gère deux cas différents en fonction du type d'utilisateur car les infos 
+                    ne sont pas les mêmes -->
+                    <?php
+                    if($type_utilisateur=='Etudiant')
+                    { ?>
+
+                    <h1>Modification de profil étudiant</h1>
+                    <a class="EmploiDuTemps" href="Calendrier/calendar_etudiant.php">Mon emploi du temps</a>
+
+
+    <div id="formDiv">
+        <form method="post" action="ModificationBDDProfilEtudiant.php" enctype="multipart/form-data"><br/>
+        <h2>Les champs suivis d'une étoile (*) sont obligatoires</h2>
+        <input type="text" name="NomEtudiant" placeholder="NOM*" <?php echo 'value=' . '\'' . 
+        $ancien_nom . '\'' ;?> size="30" maxlength="20"/> <br/><br/>
+        <input type="text" name="PrenomEtudiant" placeholder="Prenom*" <?php echo 'value=' . '\'' . 
+        $ancien_prenom . '\'' ;?> size="30" maxlength="20"/> <br/><br/>
+        <input type="text" name="MailEtudiant" placeholder="E-mail*" <?php echo 'value=' . '\'' . 
+        $ancien_email . '\'' ;?> size="30" maxlength="30"/> <br/><br/>
+        <input type="password" name="PasswordEtudiant" placeholder="Mot de passe*" 
+        size="30" maxlength="30"/> <br/><br/>
+        <input type="password" name="PasswordConfirmationEtudiant" 
+        placeholder="Confirmation du mot de passe*" size="30" maxlength="30"/> <br/><br/>
+        <label>Date de naissance*</label>
+        <input type="number" name="JourNaissance" placeholder="Jour" <?php echo 'value=' . '\'' . 
+        $ancien_jourNaissance . '\'' ;?> min="1" max="31"/>
+        <label>/</label>
+        <input type="number" name="MoisNaissance" placeholder="Mois" <?php echo 'value=' . '\'' . 
+        $ancien_moisNaissance . '\'' ;?> min="1" max="12"/>
+        <label>/</label>
+        <input type="number" name="AnneeNaissance" placeholder="Année" <?php echo 'value=' . '\'' . 
+        $ancien_anneeNaissance . '\'' ;?> min="1900" max="2016"/> <br/> <br/>
+        <input type="text" name="CodePostal" placeholder="Code Postal*" <?php echo 'value=' . '\'' . 
+        $ancien_cp . '\'' ;?> size="10" maxlength="5"/> <br/><br/>
+        <input type="text" name="AdresseEtudiant" placeholder="Adresse*" <?php echo 'value=' . '\'' . 
+        $ancien_adresse . '\'' ;?> size="30" maxlength="50"/> <br/><br/>
+        <input type="number" name="TelephoneEtudiant" placeholder="Téléphone*" <?php echo 'value=' . 
+        $ancien_telephone ;?> max="9999999999"/> <br/><br/>
+        <input type="number" name="NumeroCNIEtudiant" placeholder="Numéro de carte d'identité*" 
+        <?php echo 'value=' . '\'' . $ancien_cni . '\'' ;?> max="999999999999"/> <br/><br/>
+        <input type="text" name="EtudesEtudiant" placeholder="Niveau d'études" <?php
+        //ce champs peut rester vide. On vérifie qu'il ne le soit pas avant de concaténer
+        if($ancien_etudes) {
+            echo 'value=' . '\'' . $ancien_etudes . '\'' ;
+        }
+            ?> size="30" maxlength="30"/> <br/><br/>
+        <input type="text" name="VehiculeEtudiant" placeholder="Véhicule" <?php
+        //ce champs peut rester vide. On vérifie qu'il ne le soit pas avant de concaténer
+        if($ancien_permis) {
+            echo 'value=' . '\'' . $ancien_permis . '\'' ;
+        }
+        ?> size="30" maxlength="30"/> <br/><br/>
+        <textarea name="DescriptionEtudiant" rows="10" cols="50" maxlength="750"><?php
+        //ce champs peut rester vide. On vérifie qu'il ne le soit pas avant de le remplir
+        if($ancien_description)
+        {
+            echo $ancien_description ;
+        }
+        else
+        {
+            echo 'Description personnelle';
+
+        } ?></textarea><br/><br/>
+        <label>Image :</label><br/><br/>
+        <input type="hidden" name="oldImage" <?php echo 'value=' . '\'' . $ancien_image . '\'' ;?>>
+        <input type="file" name="image" /><br/><br/>
+        <input type="submit" name="submit" /> <br/><br/>
+    </form>
+</div>
+                    <?php
+                    }
+                    elseif($type_utilisateur=='Famille')
+                    { ?>
+                    <h1>Modification de profil famille</h1>
+
+        <div id="formDiv">
+            <form method="post" action="ModificationBDDProfilFamille.php" enctype="multipart/form-data"><br/>
+                <h2>Les champs suivis d'une étoile (*) sont obligatoires</h2>
+                <input type="text" name="NomFamille" placeholder="NOM*" <?php echo 'value=' . '\'' . 
+                $ancien_nom . '\'' ;?> size="30" maxlength="20"/> <br/><br/>
+                <input type="text" name="MailFamille" placeholder="E-mail*" <?php echo 'value=' . '\'' . 
+                $ancien_email . '\'' ;?> size="30" maxlength="30"/> <br/><br/>
+                <input type="password" name="PasswordFamille" 
+                placeholder="Mot de passe*" size="30" maxlength="30"/> <br/><br/>
+                <input type="password" name="PasswordConfirmationFamille" 
+                placeholder="Confirmation du mot de passe*" size="30" maxlength="30"/> <br/><br/>
+                <input type="text" name="CodePostal" placeholder="Code Postal*" <?php echo 'value=' . '\'' . 
+                $ancien_cp . '\'' ;?> size="10" maxlength="5"/> <br/><br/>
+                <input type="text" name="AdresseFamille" placeholder="Adresse*" <?php echo 'value=' . '\'' . 
+                $ancien_adresse . '\'' ;?> size="30" maxlength="50"/> <br/><br/>
+                <input type="text" name="TelephoneFamille" placeholder="Téléphone*" <?php echo 'value=' . '\'' . 
+                $ancien_telephone . '\'' ;?> size="30" maxlength="10"/> <br/><br/>
+                <input type="number" name="NombreEnfantsFamille" placeholder="Nombre d'enfants" <?php
+                //ce champs peut rester vide. On vérifie qu'il ne le soit pas avant de concaténer
+                if($ancien_enfants) {
+                    echo 'value=' . $ancien_enfants ;
+                }
+                    ?> max="30"/> <br/><br/>  <!-- A SURVEILLER -->
+                <textarea name="DescriptionFamille" rows="10" cols="50" maxlength="750"><?php
+                //ce champs peut rester vide. On vérifie qu'il ne le soit pas avant de le remplir
+                if($ancien_description)
+                {
+                    echo $ancien_description ;
+                }
+                else
+                {
+                    echo 'Description personnelle';
+
+                } ?></textarea><br/><br/>
+                <label>Image :</label><br/><br/>
+                <input type="hidden" name="oldImage" <?php echo 'value=' . '\'' . $ancien_image . '\'' ;?>>
+                <input type="file" name="image" /><br/><br/>
+                <input type="submit" name="submit" /> <br/><br/>
+            </form>
+        </div>
+                    <?php
+                    }
+                    else
+                    {
+                        echo 'problème de type d\'utilisateur' ;
+                    }
+                    ?>
+
+                </article>
+            </section>
+
+
+            <footer>
+            </footer>
+        </div>
+    </body>
+</html>
+
+\end{verbatim}
+\end{appendix}
+
+\end{document}  

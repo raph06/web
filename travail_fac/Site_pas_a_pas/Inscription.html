@@ -1,0 +1,59 @@
+<DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style_inscription_choix.css" />
+        <link rel="stylesheet" href="style_general.css" />
+        <title>E-Sitting - Le babysitting sans bouger de chez vous</title>
+    </head>
+    <body>
+
+        <div id = "bloc_page">
+            <header>
+                <div id="titre_principal">
+                    <div id="logo">
+                        <img src="Pictures/logo.png" alt="Logo E-sitting" />
+
+                </div>
+            </header>
+            <div id = "Menu_Principal">
+                    <ul class="fancyNav" id="myTopnav">
+                        <li id="home"><a href="Accueil.php" class="homeIcon">Accueil</a></li>
+                        <li><a href="#">Annonces</a></li>
+                        <li><a href="Accueil.php#Whoarewe">Qui sommes-nous ?</a></li>
+                        <li><a href="Accueil.php#Esitter">Rejoignez l'aventure</a></li>
+                        <li><a href="Accueil.php#Paiements">Tarifs & Paiements</a></li>
+                        <li class="icon">
+                        <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a> <!-- Initialisation du bouton qui apparait en cas de trop petite image (voir media query) -->
+                        </li>
+                    </ul>
+            </div>
+            <script>
+                function myFunction() {
+                    var x = document.getElementById("myTopnav");
+                    if (x.className === "fancyNav") {
+                        x.className += " responsive";
+                    } else {
+                        x.className = "fancyNav";
+                    }
+                }
+            </script>
+            <div id="banniere_image">
+            </div>
+
+            <section>
+                <article>
+                    <div id="ins">
+                    <p>Souhaitez-vous vous inscrire en tant qu'étudiant ou en tant que famille?</p>
+
+                    <ul id="choix">
+                        <li><a href="InscriptionEtudiant.html"><p class="insc">Etudiant</p></a></li>
+                        <li><a href="InscriptionFamille.html"><p class="insc">Famille</p></a></li>
+                    </ul>
+
+                    </div>
+                </article>
+            </section>
+        </div>
+    </body>
+</html>

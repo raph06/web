@@ -1,0 +1,71 @@
+<DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style_inscription.css" />
+        <link rel="stylesheet" href="style_general.css" />
+        <title>E-Sitting - Le babysitting sans bouger de chez vous</title> 
+    </head>
+    <body>
+
+        <div id = "bloc_page">
+            <header>
+                <div id="titre_principal">
+                    <div id="logo">
+                        <img src="Pictures/logo.png" alt="Logo E-sitting" />
+                    </div>
+                </div>
+            </header>
+            <div id = "Menu_Principal">
+                    <ul class="fancyNav" id="myTopnav">
+                        <li id="home"><a href="#home" class="homeIcon">Accueil</a></li>
+                        <li><a href="#">Annonces</a></li>                  
+                        <li><a href="#Whoarewe">Qui sommes-nous ?</a></li>
+                        <li><a href="#Esitter">Rejoignez l'aventure</a></li>
+                        <li><a href="#Paiements">Tarifs & Paiements</a></li>
+                        <li class="icon">
+                        <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a> <!-- Initialisation du bouton qui apparait en cas de trop petite image (voir media query) --> 
+                        </li>
+                    </ul>
+            </div>
+            <script>
+                function myFunction() {
+                    var x = document.getElementById("myTopnav");
+                    if (x.className === "fancyNav") {
+                        x.className += " responsive";
+                    } else {
+                        x.className = "fancyNav";
+                    }
+                }
+            </script>
+            <section>
+                <article>
+
+                    <h1>Modification de profil famille</h1>
+            <div id="formDiv">
+                <form method="post" action="traitement.php"><br/>
+                    <h2>Les champs suivis d'une étoile (*) sont obligatoires</h2>
+                    <input type="text" name="NomFamille" placeholder="ANCIEN NOM*" size="30" maxlength="20"/> <br/><br/>
+                    <input type="text" name="PrenomFamille" placeholder="ANCIEN Prenom*" size="30" maxlength="20"/> <br/><br/>
+                    <input type="text" name="MailFamille" placeholder="ANCIEN E-mail*" size="30" maxlength="30"/> <br/><br/>
+                    <input type="password" name="PasswordFamille" placeholder="ANCIEN Mot de passe*" size="30" maxlength="30"/> <br/><br/>
+                    <input type="password" name="PasswordConfirmationFamille" placeholder="Confirmation du mot de passe*" size="30" maxlength="30"/> <br/><br/>
+                    <input type="text" name="AdresseFamille" placeholder="ANCIEN Adresse*" size="30" maxlength="50"/> <br/><br/>
+                    <input type="text" name="TelephoneFamille" placeholder="ANCIEN Téléphone*" size="30" maxlength="10"/> <br/><br/>
+                    <input type="text" name="NombreEnfantsFamille" placeholder="ANCIEN Nombre d'enfants" size="30" maxlength="2"/> <br/><br/>
+                    <input type="text" name="AgeEnfantsFamille" placeholder="ANCIEN Âge des enfants. ex : 8/10/12" size="30" maxlength="30"/> <br/><br/>
+                    <textarea name="ANCIEN DescriptionFamille" rows="10" cols="50" maxlength="750">
+Description personnelle</textarea><br/><br/>
+                    <label>Photo de la famille</label> : <input type="file" name="imageFamille" /> <br/><br/>
+                    <input type="submit" name="submit" /> <br/><br/>
+                </form>
+            </div> 
+                </article>
+            </section>
+
+
+            <footer>
+            </footer>
+        </div>
+    </body>
+</html>

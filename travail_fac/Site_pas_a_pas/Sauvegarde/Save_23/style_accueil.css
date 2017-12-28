@@ -1,0 +1,598 @@
+﻿header 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo  /* gère le centrage et la mise en forme du logo  si on zoom sur la page */
+{
+    display:flex;
+    flex-direction:row;
+    margin:auto;
+}
+
+.logo img
+{
+    height:125px;
+    width:250px;
+}
+
+#connexion
+{
+    position:absolute;
+    top:0;
+    right:100;
+    max-width:14%;
+    min-width:10%;
+    margin: auto;
+}
+
+#inscription
+{
+    position:absolute;
+    top:0;
+    right:10;
+    max-width:14%;
+    min-width:10%;
+    margin:auto;
+
+}
+
+header h1
+{
+    font-family: 'poppinsregular' ,'Trebuchet M5',serif, sans-serif;
+    font-size: 3.5em;
+    font-weight: normal;
+    margin: 0 0 10px 10px;
+}
+
+header h2
+{
+    font-family: 'poppinsregular' ,'Trebuchet M5',serif, sans-serif;
+    font-size: 1.5em;
+    margin-top: 15px;
+    font-weight: normal;
+}
+
+.myButton {
+    -moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+    -webkit-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+    box-shadow:inset 0px 1px 3px 0px #91b8b3;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #768d87), color-stop(1, #6c7c7c));
+    background:-moz-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+    background:-webkit-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+    background:-o-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+    background:-ms-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+    background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#768d87', endColorstr='#6c7c7c',GradientType=0);
+    background-color:#768d87;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    border:1px solid #566963;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:3% 3%;
+    text-decoration:none;
+    text-shadow:0px -1px 0px #2b665e;
+}
+.myButton:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6c7c7c), color-stop(1, #768d87));
+    background:-moz-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+    background:-webkit-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+    background:-o-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+    background:-ms-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+    background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6c7c7c', endColorstr='#768d87',GradientType=0);
+    background-color:#6c7c7c;
+}
+.myButton:active {
+    position:relative;
+    top:1px;
+}
+
+/*
+#connexion
+{
+    position:absolute;
+    top:0;
+    right:150;
+}
+
+#inscription
+{
+    position:absolute;
+    top:0;
+    right:10;
+}
+*/
+
+/* Bannière */
+
+#banniere_image
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* aligne les encadré des titres des paragraphes */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px auto;
+    overflow:hidden; /* empêche la barre de rechercher de remonter trop haut si on zoom abusivement */
+}
+
+#banniere_image img
+{
+    height: 55%;
+	max-height: 600px;
+    width: 90%;
+	max-width: 1890px;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0px 4px 4px #1c1a19;
+    margin-bottom: 25px;
+    position:relative;
+    z-index:-1;
+}
+
+#banniere_image .searchform
+{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    flex:100px;
+    margin-top:-375px;
+    margin-bottom:280px;
+    width: 50%;
+    max-width: 800px;
+    min-width: 400px;
+    float:left;
+}
+
+#banniere_image img .searchform
+{ 
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* Fin bannière */
+
+
+#Menu_Principal
+{
+    text-align:center;
+}
+
+/* TUTORIEL fancynav DISPONIBLE ICI : http://tutorialzine.com/2011/05/css3-animated-navigation-menu/ */
+
+.fancyNav{
+    /* Affects the UL element */
+    overflow: hidden;
+    display: inline-block;
+}
+
+.fancyNav li{
+    /* Specifying a fallback color and we define CSS3 gradients for the major browsers: */
+    
+    background-color: #f0f0f0;
+    background-image: -webkit-gradient(linear,left top, left bottom,from(#fefefe), color-stop(0.5,#f0f0f0), color-stop(0.51, #e6e6e6));
+    background-image: -moz-linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
+    background-image: -o-linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
+    background-image: -ms-linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
+    background-image: linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
+    
+    border-right: 1px solid rgba(9, 9, 9, 0.125); /* affiche la barre après chaque catégorie du menu */
+    
+    /* Adding a 1px inset highlight for a more polished efect: */
+    
+    box-shadow: 1px -1px 0 rgba(255, 255, 255, 0.6) inset;
+    -moz-box-shadow: 1px -1px 0 rgba(255, 255, 255, 0.6) inset;
+    -webkit-box-shadow: 1px -1px 0 rgba(255, 255, 255, 0.6) inset;
+    
+    position:relative;
+    
+    float: left;
+    list-style: none;
+}
+
+.fancyNav li:after{
+
+    /* This creates a pseudo element inslide each LI */ 
+    
+    content:'.';
+    text-indent:-9999px;
+    overflow:hidden;
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:1;
+    opacity:0;
+    
+    /* Gradients! */
+    
+    background-image:-webkit-gradient(linear, left top, right top, from(rgba(168,168,168,0.5)),color-stop(0.5,rgba(168,168,168,0)), to(rgba(168,168,168,0.5)));
+    background-image:-moz-linear-gradient(left, rgba(168,168,168,0.5), rgba(168,168,168,0) 50%, rgba(168,168,168,0.5));
+    background-image:-o-linear-gradient(left, rgba(168,168,168,0.5), rgba(168,168,168,0) 50%, rgba(168,168,168,0.5));
+    background-image:-ms-linear-gradient(left, rgba(168,168,168,0.5), rgba(168,168,168,0) 50%, rgba(168,168,168,0.5));
+    background-image:linear-gradient(left, rgba(168,168,168,0.5), rgba(168,168,168,0) 50%, rgba(168,168,168,0.5));
+    
+    /* Creating borders with box-shadow. Useful, as they don't affect the size of the element. */
+    
+    box-shadow:-1px 0 0 #a3a3a3,-2px 0 0 #fff,1px 0 0 #a3a3a3,2px 0 0 #fff;
+    -moz-box-shadow:-1px 0 0 #a3a3a3,-2px 0 0 #fff,1px 0 0 #a3a3a3,2px 0 0 #fff;
+    -webkit-box-shadow:-1px 0 0 #a3a3a3,-2px 0 0 #fff,1px 0 0 #a3a3a3,2px 0 0 #fff;
+    
+    /* This will create a smooth transition for the opacity property */
+    
+    -moz-transition:0.25s all;
+    -webkit-transition:0.25s all;
+    -o-transition:0.25s all;
+    transition:0.25s all;
+}
+
+/* Treating the first LI and li:after elements separately */
+
+.fancyNav li:first-child{
+    border-radius: 4px 0 0 4px;
+}
+
+.fancyNav li:first-child:after,
+.fancyNav li.selected:first-child:after{
+    box-shadow:1px 0 0 #a3a3a3,2px 0 0 #fff;
+    -moz-box-shadow:1px 0 0 #a3a3a3,2px 0 0 #fff;
+    -webkit-box-shadow:1px 0 0 #a3a3a3,2px 0 0 #fff;
+    
+    border-radius:4px 0 0 4px;
+}
+
+.fancyNav li:last-child{
+    border-radius: 0 4px 4px 0;
+}
+
+/* Treating the last LI and li:after elements separately */
+
+.fancyNav li:last-child:after,
+.fancyNav li.selected:last-child:after{
+    box-shadow:-1px 0 0 #a3a3a3,-2px 0 0 #fff;
+    -moz-box-shadow:-1px 0 0 #a3a3a3,-2px 0 0 #fff;
+    -webkit-box-shadow:-1px 0 0 #a3a3a3,-2px 0 0 #fff;
+    
+    border-radius:0 4px 4px 0;
+}
+
+.fancyNav li:hover:after,
+.fancyNav li.selected:after,
+.fancyNav li:target:after{
+    /* This property triggers the CSS3 transition */
+    opacity:1;
+}
+
+.fancyNav:hover li.selected:after,
+.fancyNav:hover li:target:after{
+    /* Hides the targeted li when we are hovering on the UL */
+    opacity:0;
+}
+
+.fancyNav li.selected:hover:after,
+.fancyNav li:target:hover:after{
+    opacity:1 !important;
+}
+
+/* Styling the anchor elements */
+
+.fancyNav li a{
+    color: #5d5d5d;
+    display: inline-block;
+    font: 20px Arial,sans-serif;
+    padding: 12px 35px 14px;
+    position: relative;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6);
+    z-index:2;
+    text-decoration:none !important;
+    white-space:nowrap;
+}
+
+.fancyNav a.homeIcon{
+    background:url('Pictures/home.png') no-repeat center center;
+    display: block;
+    overflow: hidden;
+    padding-left: 12px;
+    padding-right: 12px;
+    text-indent: -9999px;
+    width: 16px;
+}
+
+ul.fancyNav li.icon /* En temps normal ce bouton est invisible */
+{display: none;
+}
+
+@media screen and (max-width:680px)
+{
+  ul.fancyNav li:not(:first-child) 
+  {
+    display: none; /* Tout disparait ... sauf voir ci-dessous */
+  }
+  ul.fancyNav li.icon
+  {
+    float: right;  /* Si la fenêtre est trop petite (voir condition max-width ci-dessus) alors on fait apparaitre le bouton */
+    display: flex;
+  }
+}
+
+@media screen and (max-width:680px)
+{
+  ul.fancyNav.responsive
+   {
+    position: relative;
+   }
+  ul.fancyNav.responsive li.icon
+  {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display:flex;
+  }
+  ul.fancyNav.responsive li
+  {
+    float: none;
+    display: flex;
+  }
+  ul.fancyNav.responsive li a
+  {
+    display: flex;
+    text-align: left;
+    margin:auto;
+  }
+}
+
+/* FIN TUTORIEL fancynav */
+
+section
+{
+	display: flex;
+    flex-direction: column;
+    align-items: center; /* aligne les encadré des titres des paragraphes */
+}
+
+article
+{
+	max-width: 1890px;
+    margin-left:5%;
+    margin-right:5%;
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* aligne les encadré des titres des paragraphes */
+    flex-wrap: wrap;
+    position: relative;
+    background: skyblue;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding: 2px;
+    color: black;
+    margin-bottom: 15px;
+
+}
+
+article img+h1
+{
+    position: relative;
+    background-color: #706b64;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding: 8px;
+    color: white;
+    font-size: 1.6em;
+    text-align:center;
+    display:flex;
+    align-items:center;
+
+}
+
+article img
+{
+    height: 76px;
+    width: 70px;
+}
+
+article p
+{
+	margin-left: 10px;
+	margin-right: 10px;
+    text-align: justify;
+    text-justify: inter-word;
+    display:flex;
+    align-items:center;
+}
+
+#Presentation_image
+{
+    display:flex;
+    flex-direction : column;
+}
+
+#Categorie_presentation_image
+{
+    margin-top: 15px;
+    display:flex;
+    flex-direction : row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: 20%;
+}
+
+#Categorie_presentation_image p
+{
+    font-family: 'poppinsregular', arial, 'Trebuchet MS', serif, sans-serif;
+    font-weight: normal;
+    font-size: 1.4em;
+}
+
+#Categorie_presentation_image img
+{
+    height:7%;
+    width:6%;
+    min-height:250px;
+    min-width:250px;
+    max-height: 290px;
+    max-width: 315px;
+    margin-bottom: 25px;
+}
+
+footer
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* aligne les encadré des titres des paragraphes */
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#mail
+{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: relative;
+    background-color: skyblue;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 15px;
+
+}
+
+#mail img+h1
+{
+    margin-left: 5px;
+    position: relative;
+    background-color: #706b64;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding: 8px;
+    color: white;
+    font-size: 1.6em;
+    text-align:center;
+}
+
+#mail img
+{
+    margin-left: 90px;
+    height: 76px;
+    width: 76px;  
+}
+
+#mail p
+{
+    margin-left: 65px;
+    display:flex;
+    flex-direction:column;
+}
+
+/*--------------------------------------------------------------
+1.0 - BASE SITE STYLES
+--------------------------------------------------------------*/
+
+/*
+*,*:after,*:before {
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+}
+*/
+
+.cf:before,
+.cf:after {
+    content:"";
+    display:table;
+}
+.cf:after {
+    clear:both;
+}
+
+/*--------------------------------------------------------------
+2.0 - SEARCH FORM
+--------------------------------------------------------------*/
+.searchform {
+  background:#f4f4f4;
+  background:rgba(244,244,244,.79);
+  border: 1px solid #d3d3d3;
+  padding: 2px 5px;
+  width:50%; /* gère la taille de la barre de recherche */
+  max-width: 1890px; /* définit la taille max de la barre de recherche */
+  box-shadow:0 4px 9px rgba(0,0,0,.37);
+  -moz-box-shadow:0 4px 9px rgba(0,0,0,.37);
+  -webkit-box-shadow:0 4px 9px rgba(0,0,0,.37);
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+.searchform input, .searchform button {
+    float: left;
+}
+.searchform input {
+    background:#fefefe;
+    border: none;
+    font:12px/12px 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    margin-right: 5px;
+    padding: 10px;
+    width: 95%;
+    box-shadow: 0 0 4px rgba(0,0,0,.4) inset, 1px 1px 1px rgba(255,255,255,.75);
+    -moz-box-shadow: 0 0 4px rgba(0,0,0,.4) inset, 1px 1px 1px rgba(255,255,255,.75);
+    -webkit-box-shadow: 0 0 4px rgba(0,0,0,.4) inset, 1px 1px 1px rgba(255,255,255,.75);
+  border-radius: 9px;
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px
+}
+    .searchform input:focus {
+        outline: none;
+        box-shadow:0 0 4px #0d76be inset;
+        -moz-box-shadow:0 0 4px #0d76be inset;
+        -webkit-box-shadow:0 0 4px #0d76be inset;
+    }
+    .searchform input::-webkit-input-placeholder {
+    font-style: italic;
+    line-height: 15px
+    }
+
+    .searchform input:-moz-placeholder {
+    font-style: italic;
+    line-height: 15px
+    }
+
+.searchform button {
+    background: rgb(52,173,236);
+    background: -moz-linear-gradient(top, rgba(52,173,236,1) 0%, rgba(38,145,220,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(52,173,236,1)), color-stop(100%,rgba(38,145,220,1)));
+    background: -webkit-linear-gradient(top, rgba(52,173,236,1) 0%,rgba(38,145,220,1) 100%);
+    background: -o-linear-gradient(top, rgba(52,173,236,1) 0%,rgba(38,145,220,1) 100%);
+    background: -ms-linear-gradient(top, rgba(52,173,236,1) 0%,rgba(38,145,220,1) 100%);
+    background: linear-gradient(to bottom, rgba(52,173,236,1) 0%,rgba(38,145,220,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#34adec', endColorstr='#2691dc',GradientType=0 );
+    border: none;
+    color:#fff;
+    cursor: pointer;
+    font: 13px/13px 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    padding: 10px;
+    width:106px;
+    box-shadow: 0 0 2px #2692dd inset;
+    -moz-box-shadow: 0 0 2px #2692dd inset;
+    -webkit-box-shadow: 0 0 2px #2692dd inset;
+  border-radius: 9px;
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px;
+}
+
+.searchform button:hover
+{
+    opacity:.9;  
+}

@@ -1,0 +1,67 @@
+<DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style_inscription.css" />
+        <link rel="stylesheet" href="style_general.css" />
+        <title>E-Sitting - Le babysitting sans bouger de chez vous</title> 
+    </head>
+    <body>
+
+        <div id = "bloc_page">
+            <header>
+                <div id="titre_principal">
+                    <div id="logo">
+                        <img src="Pictures/logo.png" alt="Logo E-sitting" />
+                    </div>
+                </div>
+            </header>
+            <div id = "Menu_Principal">
+                    <ul class="fancyNav" id="myTopnav">
+                        <li id="home"><a href="#home" class="homeIcon">Accueil</a></li>
+                        <li><a href="#">Accueil</a></li>                  
+                        <li><a href="annonces">Annonces</a></li>
+                        <li><a href="#comsignalement">Commentaires signalés</a></li>
+                        <li><a href="#Paiements">Taux, Tarifs & Paiements</a></li>
+                        <li class="icon">
+                        <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a> <!-- Initialisation du bouton qui apparait en cas de trop petite image (voir media query) --> 
+                        </li>
+                    </ul>
+            </div>
+            <script>
+                function myFunction() {
+                    var x = document.getElementById("myTopnav");
+                    if (x.className === "fancyNav") {
+                        x.className += " responsive";
+                    } else {
+                        x.className = "fancyNav";
+                    }
+                }
+            </script>
+            <section>
+                <article>
+
+                    <h1>Taux, Tarifs & Paiements</h1>
+            <div id="formDiv">
+                <form method="post" action="traitement.php"><br/>
+                    <input type="number" min="0" name="Jours fériés" placeholder="$fériés" /> <br/><br/>
+                    <input type="number" min="0" name="Week-end" placeholder="Week_end"  /> <br/><br/>
+                    <input type="number" min="0" name="Nuit" placeholder="$nuits" /> <br/><br/>
+                    <input type="number" min="0" name="Comission" placeholder="$commissions"  /> <br/><br/>
+                     <textarea name="Mail" rows="10" cols="50">
+"Chers utilisateurs,
+Nous allons faire exploser les taux pour le plus grand bonheur des étudiants et de notre porte monnaie.
+A plus les cocos,
+Le beure et l'argent du beure." </textarea><br/><br/>
+                    <input type="submit" name="submit" /> <br/><br/>
+                </form>
+            </div> 
+                </article>
+            </section>
+
+
+            <footer>
+            </footer>
+        </div>
+    </body>
+</html>

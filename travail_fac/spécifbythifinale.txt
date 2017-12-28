@@ -1,0 +1,24 @@
+ConsultationProfilUtilisateur.php : 
+Cette page permet de se connecter à la base de donnée grâce à connect.php et d’afficher les informations de l’utilisateur en utilisant son ID transmis par $_SESSION. Les informations proviennent de la table users et varient en fonction du statut de l’utilisateur (Etudiant ou
+Famille). 
+Pour les étudiants, les commentaires provenant de la table commentaire sont affiché toujours en utilisant le même ID. Ils sont disposé sous la forme d'un formulaire pour pouvoir permettre le signalement de commentaires inappropriés par l'utilisateur en transmettant l'ID des commentaires.
+Les contrats de l'utilisateur sont affichés, toujours grâce à l'ID de l'utilisateur, depuis la table bookings. En fonction du statut du contrat, il sera affiché dans une rubrique plûtot qu'une autre.
+
+Style_profil.css
+Ce CSS permet d'afficher les informations des pages de profils dans 5 à 6 rubrique dont l'une comporte une commande overflow:auto; permettant d'afficher les commentaire avec une barre de scrolling, ce qui nous a permis d'afficher tout les commentaires sans pour autant avoir une page qui paraisse surchargé.
+
+
+
+Moderation com.php : 
+Cette page récupère l'ID du ou des commentaires transmis en $_POST par une page de consultation de profil.
+le champs moderation de la table commentaire de ce(s) dernier(s) sera(ont) modifié(s) en "1". 
+Lorsque cette modification a été faite, un message de confirmation est affiché et renvoie automatiquement l’utilisateur sur la page précédente.
+
+
+
+ConsultationProfilUtilisateurTiers.php :
+Cette page permet de se connecter à la base de donnée grâce à connect.php et d’afficher les informations d’un utilisateur visité en utilisant l'ID de ce dernier transmis par $_POST. Les informations proviennent de la table users et varient en fonction du statut de l’utilisateur (Etudiant ou Famille). 
+Les commentaires provenant de la table commentaire sont affiché toujours en utilisant le même ID. Ils sont disposé sous la forme d'un formulaire pour pouvoir permettre le signalement de commentaires inappropriés par l'utilisateur en transmettant l'ID des commentaires.
+Si l'utilisateur consultant est un étudiant, il pourra soit accepter ou refuser l'offre de contrat soit revenir directement à son profil.
+Si l'utilisateur consultant est une famille, il pourra soit enclenché la mise en forme d'un contrat soit revenir à la recherche d'étudiants.
+

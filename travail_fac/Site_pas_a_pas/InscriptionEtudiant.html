@@ -1,0 +1,86 @@
+<DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style_inscription.css" />
+        <link rel="stylesheet" href="style_general.css" />
+        <title>E-Sitting - Le babysitting sans bouger de chez vous</title>
+    </head>
+    <body>
+        <div id = "bloc_page">
+            <header>
+                <div id="titre_principal">
+                    <div id="logo">
+                        <img src="Pictures/logo.png" alt="Logo E-sitting" />
+                    </div>
+                </div>
+            </header>
+            <div id = "Menu_Principal">
+                    <ul class="fancyNav" id="myTopnav">
+                        <li id="home"><a href="Accueil.php" class="homeIcon">Accueil</a></li>
+                        <li><a href="Accueil.php">Annonces</a></li>
+                        <li><a href="Accueil.php#Whoarewe">Qui sommes-nous ?</a></li>
+                        <li><a href="#">Rejoignez l'aventure</a></li>
+                        <li><a href="Accueil.php#Paiements">Tarifs & Paiements</a></li>
+                        <li class="icon">
+                        <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a> <!-- Initialisation du bouton qui apparait en cas de trop petite image (voir media query) -->
+                        </li>
+                    </ul>
+            </div>
+            <script>
+                function myFunction() {
+                    var x = document.getElementById("myTopnav");
+                    if (x.className === "fancyNav") {
+                        x.className += " responsive";
+                    } else {
+                        x.className = "fancyNav";
+                    }
+                }
+            </script>
+            <section>
+                <article>
+                    <div id="menu">
+                        <a href="InscriptionEtudiant.html">Etudiant</a>
+                        <a href="InscriptionFamille.html">Famille</a>
+                    </div>
+                    <h1>Inscription etudiants</h1>
+            <div id="formDiv">
+                <form method="post" action="InscriptionEtudiant.php" enctype="multipart/form-data"><br/>
+                    <h2>Les champs suivis d'une étoile (*) sont obligatoires</h2>
+                    <input type="text" name="NomEtudiant" placeholder="NOM*" size="30" maxlength="20" /> <br/><br/>
+                    <input type="text" name="PrenomEtudiant" placeholder="Prenom*" size="30" maxlength="20"/> <br/><br/>
+                    <input type="text" name="MailEtudiant" placeholder="E-mail*" size="30" maxlength="30"/> <br/><br/>
+                    <input type="password" name="PasswordEtudiant" placeholder="Mot de passe*" size="30" maxlength="30"/> <br/><br/>
+                    <input type="password" name="PasswordConfirmationEtudiant" placeholder="Confirmation du mot de passe*" size="30" maxlength="30"/> <br/><br/>
+                    <label>Date de naissance*</label>
+                    <input type="number" name="JourNaissance" placeholder="jour" min="1" max="31"/>
+                    <label>/</label>
+                    <input type="number" name="MoisNaissance" placeholder="mois" min="1" max="12"/>
+                    <label>/</label>
+                    <input type="number" name="AnneeNaissance" placeholder="année" min="1900" max="2016"/> <br/> <br/>
+                    <input type="text" name="CodePostal" placeholder="Code Postal*" size="10" maxlength="5" /> <br/> <br/>
+                    <input type="text" name="AdresseEtudiant" placeholder="Adresse*" size="30" maxlength="50"/> <br/><br/>
+                    <input type="number" name="TelephoneEtudiant" placeholder="Téléphone*" max="9999999999"/> <br/><br/>
+                    <input type="number" name="Prix" placeholder="Prix*" min="10" max="99"/> <br/><br/>
+                    <input type="number" name="tempsReponse" placeholder="Temps de réponse moyen (en heure)*" min="1" max="72"/> <br/><br/>
+                    <input type="number" name="NumeroCNIEtudiant" placeholder="Numéro de carte d'identité*" size="30" max="999999999999"/> <br/><br/>
+                    <input type="text" name="EtudesEtudiant" placeholder="Niveau d'études" size="30" maxlength="30"/> <br/><br/>
+                    <input type="text" name="VehiculeEtudiant" placeholder="Véhicule" size="30" maxlength="30"/> <br/><br/>
+                    <textarea name="DescriptionEtudiant" rows="10" cols="50" maxlength="750">
+Description personnelle</textarea><br/><br/>
+                <label>Image* :</label><br/><br/>
+                <input type="file" name="image" /><br/><br/>
+                    <label>J'accepte les conditions d'utilisateur.</label><br/>
+                    <input type="checkbox" name="conditions" /><br/><br/>
+                    <input type="submit" name="submit" /> <br/><br/>
+                </form>
+            </div>
+                </article>
+            </section>
+
+
+            <footer>
+            </footer>
+        </div>
+    </body>
+</html>
